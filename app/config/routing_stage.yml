@@ -1,0 +1,6 @@
+api_doc:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix: /doc
+
+_main:
+    resource: routing.yml

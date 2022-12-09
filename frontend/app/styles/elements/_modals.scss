@@ -1,0 +1,24 @@
+// Modals
+.modal-header {
+  border-bottom: 0;
+}
+
+.modal-title {
+  font-size: 1.125rem;
+}
+
+.modal-footer {
+  background: $gray-100;
+}
+
+/* 
+.modal-footer {
+  @include border-bottom-radius($border-radius);
+}
+ */
+.modal-dialog {
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+  // box-shadow: $box-shadow-lg-default;
+  // @include border-radius($border-radius);
+}

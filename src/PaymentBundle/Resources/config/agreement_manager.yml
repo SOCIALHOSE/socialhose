@@ -1,0 +1,10 @@
+#
+# Agreement managers.
+#
+services:
+  payment.agreement_manager.orm:
+    class: 'PaymentBundle\Agreement\ORMAgreementManager'
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+
+  payment.agreement_manager: '@payment.agreement_manager.orm'

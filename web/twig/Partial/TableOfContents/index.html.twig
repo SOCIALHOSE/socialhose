@@ -1,0 +1,21 @@
+{#
+
+    Table of contents.
+
+#}
+{%- if tableOfContents != 'no' -%}
+    <div class="table-of-contents">
+        <ul class="feeds">
+            {%- for feed in feeds -%}
+                <li>
+                    {%- include _root ~ '/Partial/TableOfContents/feed.html.twig' with {
+                        tableOfContents: tableOfContents,
+                        showArticlesCount: showArticlesCount,
+                        feed: feed,
+                        themeType: themeType
+                    } -%}
+                </li>
+            {%- endfor -%}
+        </ul>
+    </div>
+{%- endif -%}

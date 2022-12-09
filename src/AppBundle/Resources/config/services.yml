@@ -1,0 +1,28 @@
+imports:
+    - { resource: controllers.yml }
+    - { resource: forms.yml }
+    - { resource: configuration.yml }
+    - { resource: commands.yml }
+    - { resource: managers.yml }
+
+services:
+  app.cache:
+    class: 'AppBundle\Cache\DoctrineCacheItemPool'
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+
+  app.pagination_listener.results:
+    class: 'AppBundle\EventListener\ResponsePagination'
+    tags:
+      - { name: knp_paginator.subscriber }
+
+  app.form_extension.localization:
+    class: 'AppBundle\Form\Type\Extension\LocalizationTypeExtension'
+    tags:
+      -
+        name: 'form.type_extension'
+        alias: 'form'
+        extended_type: 'Symfony\Component\Form\Extension\Core\Type\FormType'
+
+  app.formatter.trace:
+    class: 'AppBundle\Monolog\Formatter\TraceLogFormatter'

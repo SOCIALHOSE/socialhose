@@ -1,0 +1,16 @@
+{
+  "login": {
+    "mainLabel": "De Sign in",
+    "emailLabel": "DE Email Address",
+    "password": "DE Password",
+    "rememberMe": "de Remember me",
+    "forgotPass": "de Forgot your Password?",
+    "signInBtn": "de Sign In"
+  },
+  "forgotPass": {
+    "mainLabel": "DE Password Reset",
+    "backLabel": "DE Back to Sign In",
+    "emailLabel": "DE Email Address",
+    "resetBtn": "DE Password Reset"
+  }
+}

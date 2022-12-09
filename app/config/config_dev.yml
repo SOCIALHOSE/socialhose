@@ -1,0 +1,35 @@
+imports:
+    - { resource: config.yml }
+    - { resource: config_api_doc.yml }
+
+framework:
+    router:
+        resource: "%kernel.root_dir%/config/routing_dev.yml"
+        strict_requirements: true
+    profiler: { only_exceptions: false }
+
+web_profiler:
+    toolbar: true
+    intercept_redirects: false
+
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+            channels: [!event]
+        console:
+            type:   console
+            channels: [!event, !doctrine]
+
+        # Log all notifications received from queue command.
+        queue_command:
+            level: debug
+
+        payment_api:
+            level: debug
+
+swiftmailer:
+    delivery_address: "%test.delivery_address%"
+    logging: '%kernel.debug%'

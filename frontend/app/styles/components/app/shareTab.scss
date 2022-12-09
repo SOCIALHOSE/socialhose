@@ -1,0 +1,104 @@
+.notifications-topbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+
+  &_buttons_wrap {
+    display: block;
+    width: 100%;
+  }
+
+  .notifications-buttons {
+    float: right;
+
+    .button {
+      margin: 5px;
+    }
+  }
+
+  .middle-text {
+    text-align: center;
+    font-size: 18px;
+    color: #6c757d;
+    margin: 10px;
+  }
+
+  .left {
+    float: left;
+
+    & > div {
+      display: inline-block;
+      font-size: 16px;
+      margin-inline-end: 5px;
+    }
+
+    .Select {
+      display: inline-block;
+      width: 100px;
+      vertical-align: middle;
+    }
+  }
+}
+
+[dir='rtl'] .notifications-topbar { 
+  .notifications-buttons {
+    float: left;
+  }
+
+  .left {
+    float: right;
+  }
+}
+
+.share-tab-form-container {
+  .schedule-options,
+  .schedule-options__group,
+  .new-schedule {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .schedule-select-field {
+    margin: 0 5px;
+    min-width: 130px;
+  }
+
+  .schedule-select-field--time {
+    min-width: 155px;
+  }
+
+  .schedule-select-field--hour,
+  .schedule-select-field--minute {
+    min-width: 60px;
+  }
+
+  .share-tab-form-body {
+    display: flex;
+
+    .recipient-form {
+      width: 20%;
+
+      .recipient-form__title {
+        margin-bottom: 15px;
+      }
+
+      .form-field {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .notifications-topbar {
+    flex-direction: column;
+
+    .notifications-buttons {
+      float: right;
+      margin-top: 0.5rem;
+    }
+  }
+}

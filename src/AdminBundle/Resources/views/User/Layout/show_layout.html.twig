@@ -1,0 +1,23 @@
+{% extends 'AdminBundle::layout-inner.html.twig' %}
+
+{% block inner_content %}
+    <h1>
+        {%- block show_title -%}
+        {%- endblock show_title -%}
+    </h1>
+
+    {%- block show_content -%}
+    {%- endblock show_content -%}
+
+    <div>
+        {%- block show_buttons -%}
+            <div style="display: inline-block">
+                <a class="btn btn-default" href="{{ listUrl }}">Back to the list</a>
+            </div>
+            <div style="display: inline-block">
+                <a class="btn btn-warning" href="{{ editUrl }}">Edit</a>
+                <a class="btn btn-danger" href="{{ deleteUrl }}">Delete</a>
+            </div>
+        {%- endblock show_buttons -%}
+    </div>
+{% endblock inner_content %}

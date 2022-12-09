@@ -1,0 +1,155 @@
+{% extends "AdminBundle::layout-inner.html.twig" %}
+
+{% block stylesheets %}
+    {{- parent() -}}
+    <style>
+        .payment-details {
+            display: none;
+        }
+    </style>
+{% endblock stylesheets %}
+
+{% block inner_content %}
+    <h1>
+        Payments
+    </h1>
+
+    <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th style="width: 1%">#</th>
+            <th>
+                {{- knp_pagination_sortable(payments, 'Date', 'Payment.createdAt') -}}
+            </th>
+            <th>
+                {{- knp_pagination_sortable(payments, 'User', 'Owner.email') -}}
+            </th>
+            <th>
+                {{- knp_pagination_sortable(payments, 'Amount', 'Payment.amount.amoun') -}}
+            </th>
+            <th>
+                {{- knp_pagination_sortable(payments, 'Currency', 'Payment.amount.currency') -}}
+            </th>
+            <th>
+                {{- knp_pagination_sortable(payments, 'Status', 'Payment.status') -}}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for payment in payments %}
+            <tr>
+                <td>
+                    <a class="more" href="#" data-target="#payment_{{- payment.id -}}">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </td>
+                <td>
+                    {{- payment.createdAt|date('Y-m-d H:i:s') -}}
+                </td>
+                <td>
+                    {{- payment.subscription.owner.email -}}
+                </td>
+                <td>
+                    {{- payment.amount.amount|number_format(2) -}}
+                </td>
+                <td>
+                    {{- payment.amount.currency -}}
+                </td>
+                <td>
+                    {{- payment.status.value -}}
+                </td>
+            </tr>
+            <tr id="payment_{{- payment.id -}}" class="payment-details">
+                <td colspan="6">
+                    {%- set subscriptionType = payment.subscription.subscriptionType -%}
+                    <h3>Subscription</h3>
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th>
+                                Type
+                            </th>
+                            <td>
+                                {{- subscriptionType.value is constant('ORGANIZATION', subscriptionType) ? 'organization' : 'personal' -}}
+                            </td>
+                        </tr>
+                        {%- if subscriptionType.value is constant('ORGANIZATION', subscriptionType) -%}
+                            <tr>
+                                <th>
+                                    Name
+                                </th>
+                                <td>
+                                    {{- payment.subscription.getOrganization.name -}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Department address
+                                </th>
+                                <td>
+                                    {{- payment.subscription.organizationAddress -}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Department email
+                                </th>
+                                <td>
+                                    {{- payment.subscription.organizationEmail -}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Department phone
+                                </th>
+                                <td>
+                                    {{- payment.subscription.organizationPhone -}}
+                                </td>
+                            </tr>
+                        {%- endif -%}
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6" class="text-center">No data.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+
+    <div class="pagination">
+        {{- knp_pagination_render(payments) -}}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{- parent() -}}
+    <script>
+      (function ($) {
+        $(function() {
+          $('.more').click(function () {
+            var $this = $(this);
+            var details = $($this.data('target'));
+
+            if (details.hasClass('open')) {
+              details
+                .removeClass('open')
+                .hide();
+              $this.find('i')
+                .removeClass('fa-minus')
+                .addClass('fa-plus');
+            } else {
+              details
+                .addClass('open')
+                .show();
+              $this.find('i')
+                .removeClass('fa-plus')
+                .addClass('fa-minus');
+            }
+          });
+        });
+      })(jQuery);
+    </script>
+{% endblock javascripts %}

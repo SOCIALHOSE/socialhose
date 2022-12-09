@@ -1,0 +1,66 @@
+services:
+  #
+  # Override refresh token authenticator.
+  # We did this because all our api methods except parameters names in
+  # camelCase but original authenticator expect 'refresh_token' instead of
+  # 'refreshToken' ...
+  #
+  gesdinet.jwtrefreshtoken.authenticator:
+    class: 'AuthenticationBundle\Security\Http\Authentication\RefreshTokenAuthenticator'
+
+  #
+  # Override default FOS user provider.
+  # Add user role checker.
+  #
+  authentication_bundle.user_provider:
+    class: 'AuthenticationBundle\Security\Core\User\EmailUserProvider'
+    arguments:
+      - '@fos_user.user_manager'
+      - '@user.role_checker'
+    public: false
+
+  authentication_bundle.controller.token:
+    class: 'AuthenticationBundle\Controller\TokenController'
+    parent: api.controller.abstract
+
+  authentication_bundle.event_listener.authentication:
+    class: 'AuthenticationBundle\EventListener\AuthenticationSubscriber'
+    tags:
+      - { name: kernel.event_subscriber }
+
+  #
+  # Setup authentication handlers.
+  #
+  authentication_bundle.authentication_handler.success:
+    class: 'AuthenticationBundle\Security\Http\Authentication\AuthenticationSuccessHandler'
+    arguments:
+      - '@lexik_jwt_authentication.jwt_manager'
+      - '@event_dispatcher'
+      - '@serializer'
+      - '@fos_user.user_manager'
+    tags:
+      - { name: monolog.logger, channel: security }
+  # Setup alias for refresh token service.
+  lexik_jwt_authentication.handler.authentication_success: '@authentication_bundle.authentication_handler.success'
+
+  authentication_bundle.authentication_handler.failure:
+    class: 'AuthenticationBundle\Security\Http\Authentication\AuthenticationFailureHandler'
+    arguments:
+      - '@event_dispatcher'
+    tags:
+      - { name: monolog.logger, channel: security }
+  # Setup alias for refresh token service.
+  lexik_jwt_authentication.handler.authentication_failure: '@authentication_bundle.authentication_handler.failure'
+
+  authentication_bundle.authentication.listener:
+    class: 'AuthenticationBundle\Security\Http\Firewall\AuthenticationListener'
+    arguments:
+      - '@security.token_storage'
+      - '@security.authentication.manager'
+      - '@authentication_bundle.authentication_handler.success'
+      - '@authentication_bundle.authentication_handler.failure'
+      - # provider key injected by security factory
+
+  authentication_bundle.user_checker:
+    class: 'AuthenticationBundle\Security\Core\User\UserChecker'
+  security.user_checker: '@authentication_bundle.user_checker'

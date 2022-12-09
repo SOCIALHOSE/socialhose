@@ -1,0 +1,40 @@
+#
+# Payment gateways.
+#
+services:
+  # PayPal
+  payment.gateway.paypal_factory:
+    class: 'PaymentBundle\Gateway\PayPalPaymentGatewayFactory'
+    arguments:
+      - '@payment.agreement_manager'
+      - '@router'
+      - 'app_index_index'
+      - '%paypal.mode%'
+    public: false
+
+  payment.gateway.paypal:
+    class: 'PaymentBundle\Gateway\PayPalPaymentGateway'
+    factory: [ '@payment.gateway.paypal_factory', 'createPayPalGateway' ]
+    arguments:
+      - '@payment.paypal.api_context'
+    public: false
+
+  #
+  # Payment gateway specific services and configurators.
+  #
+
+  # PayPal
+  payment.paypal.api_context_factory:
+    class: 'PayPal\ApiContextFactory'
+    arguments:
+      - '@monolog.logger.payment_api'
+    public: false
+
+  payment.paypal.api_context:
+    class: 'PayPal\Rest\ApiContext'
+    factory: [ '@payment.paypal.api_context_factory', 'generate' ]
+    arguments:
+      - '%paypal.client_id%'
+      - '%paypal.secret%'
+      - '%paypal.mode%'
+    public: false

@@ -1,0 +1,7 @@
+#
+# Define used indices for production environment
+#
+services:
+  index.external: '@index.external.hose'
+  index.articles: '@index.articles.elasticsearch'
+  index.sources: '@index.sources.elasticsearch'

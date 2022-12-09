@@ -1,0 +1,29 @@
+.cost-calc {
+  &__price-card .card {
+    position: sticky;
+    top: 30px;
+  }
+
+  &__title {
+    font-weight: $font-weight-bold;
+    color: $primary;
+    font-size: 2rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .cost-calc {
+    &__price-card {
+      position: sticky;
+      left: 0;
+      bottom: 15px;
+      
+      .start-btn {
+        padding: 0.375rem 1.5rem;
+        font-size: 0.8rem;
+        line-height: 1.5;
+      }
+    }
+  }
+}

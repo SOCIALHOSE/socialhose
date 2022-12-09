@@ -1,0 +1,20 @@
+{% extends 'AdminBundle::layout-inner.html.twig' %}
+
+{% block inner_content %}
+    <h1>
+        {%- block edit_title -%}
+        {%- endblock edit_title -%}
+    </h1>
+
+    <div style="margin-bottom: 20px;">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div>
+            <div style="display: inline-block">
+                <input type="submit" class="btn btn-success" value="Save" />
+                <a class="btn btn-default" href="{{ indexUrl }}">Back to the list</a>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

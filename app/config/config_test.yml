@@ -1,0 +1,17 @@
+imports:
+    - { resource: config_dev.yml }
+
+framework:
+    test: ~
+    session:
+        storage_id: session.storage.mock_file
+
+doctrine:
+    dbal:
+        dbname: "%database_name%_test"
+
+lexik_jwt_authentication:
+    token_ttl: 8640 # 1 day
+
+swiftmailer:
+    delivery_address: "%test.delivery_address%"

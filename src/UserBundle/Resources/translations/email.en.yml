@@ -1,0 +1,19 @@
+password_change:
+  subject: Password is changed
+  message: |
+    <h4>Hello %firstName% %lastName%!</h4> <p> You new password is %password% </p> <p> Regards, the Team. </p>
+
+resetting:
+  subject: Password resetting
+  message: |
+    <h4>Hello %firstName% %lastName%!</h4> <p> To reset your password - please visit %confirmationUrl% </p> <p> Regards, the Team. </p>
+
+verification_success:
+  subject: 'Verification status'
+  message: |
+    <h4>Hello %firstName% %lastName%!</h4> <p> You registration is verified and you may proceed login with you credentials </p> <p> Email: %email% Password: %password% </p> <p> Regards, the Team. </p>
+
+verification_rejected:
+  subject: 'Verification status'
+  message: |
+    <h4>Hello %firstName% %lastName%!</h4> <p> Unfortunately you registration is rejected. Payments will be refund. </p> <p> Regards, the Team. </p>

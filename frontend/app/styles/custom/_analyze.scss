@@ -1,0 +1,14 @@
+.no-data {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  height: 100%;
+  left: 0;
+  background-color: $gray-100;
+  opacity: 0.8;
+  z-index: 1;
+  user-select: none;
+}

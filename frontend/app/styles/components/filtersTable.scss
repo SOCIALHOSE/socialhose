@@ -1,0 +1,180 @@
+$gray-border: 1px solid $gray-200;
+$included-color: #009ddb;
+$excluded-color: #fbd2d3;
+
+.filters-table {
+  transition: all 0.2s;
+
+  &__group {
+    background: #e6e6e6;
+    border: $gray-border;
+
+    .fa-chevron-right,
+    .fa-chevron-left {
+      display: inline-block;
+    }
+
+    .fa-chevron-down {
+      display: none;
+    }
+
+    &--expanded {
+      //border-top: 3px solid #f90;
+      //margin-top: -2px;
+      background: #ffffff;
+
+      .fa-chevron-right,
+      .fa-chevron-left {
+        display: none;
+      }
+
+      .fa-chevron-down {
+        display: inline-block;
+      }
+    }
+  }
+
+  &__head {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: space-between;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: $gray-100;
+    background-clip: border-box;
+    padding: 7px 5px 5px 30px;
+    font-size: 13px;
+    cursor: pointer;
+
+    .fa-chevron-down,
+    .fa-chevron-right,
+    .fa-chevron-left {
+      height: 21px;
+      line-height: 20px;
+      right: auto;
+      bottom: auto;
+      left: 10px;
+      position: absolute;
+    }
+
+    div:last-child {
+      position: relative;
+      top: -1px;
+      float: right;
+    }
+
+    span {
+      padding: 3px 6px;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .included {
+      background: $included-color;
+    }
+
+    .excluded {
+      background: $excluded-color;
+    }
+
+    .fa-times {
+      color: #939598;
+      cursor: pointer;
+      font-size: 13px;
+    }
+  }
+
+  &__body {
+    border-top: $gray-border;
+  }
+
+  &__item {
+    padding: 5px 10px 5px 10px;
+    text-align: start;
+    font-size: 13px;
+    cursor: pointer;
+    margin-top: 1px;
+    word-break: break-all;
+
+    &:hover {
+      background: #d9f0fa;
+    }
+
+    &:last-of-type {
+      padding-bottom: 10px;
+    }
+
+    span {
+      float: right;
+    }
+
+    &--included,
+    &--included:hover {
+      background: $included-color;
+      color: white;
+    }
+
+    &--excluded,
+    &--excluded:hover {
+      background: $excluded-color;
+    }
+  }
+
+  &__more,
+  &__less {
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px 10px 5px 10px;
+    width: calc(50% - 2px);
+  }
+
+  &__more {
+    text-align: start;
+    &--hidden {
+      visibility: hidden;
+    }
+    &--none {
+      display: none;
+    }
+  }
+
+  &__less {
+    text-align: end;
+    &--hidden {
+      visibility: hidden;
+    }
+    &--none {
+      display: none;
+    }
+  }
+
+  &__clear-msg {
+    font-size: 12px;
+    padding: 5px 10px 5px 10px;
+  }
+}
+
+[dir='rtl'] .filters-table {
+  &__head {
+    padding: 7px 30px 5px 5px;
+
+    .fa-chevron-down,
+    .fa-chevron-right,
+    .fa-chevron-left {
+      left: auto;
+      right: 10px;
+    }
+
+    div:last-child {
+      float: left;
+    }
+  }
+
+  &__item {
+    span {
+      float: left;
+    }
+  }
+}

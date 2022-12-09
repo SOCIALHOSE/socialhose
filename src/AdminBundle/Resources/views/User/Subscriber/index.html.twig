@@ -1,0 +1,15 @@
+{% extends 'AdminBundle:User/Layout:index_layout.html.twig' %}
+
+{% block index_title %}
+    Subscribers list
+{% endblock index_title %}
+
+{% block index_row_buttons %}
+    {{- parent() -}}
+    <button
+            data-href="{{ path(resendPasswordRoute, { 'id': user.id }) }}"
+            class="btn btn-default btn-block user-password-resend"
+    >
+        Resend password
+    </button>
+{% endblock index_row_buttons %}

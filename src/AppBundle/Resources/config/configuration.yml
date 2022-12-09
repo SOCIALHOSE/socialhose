@@ -1,0 +1,19 @@
+services:
+  app.configuration_definitions:
+    class: 'AppBundle\Configuration\ConfigurationDefinitionMap'
+    public: false
+
+  app.configuration.abstract:
+    class: 'AppBundle\Configuration\AbstractConfiguration'
+    arguments:
+      - '@app.configuration_definitions'
+    abstract: true
+
+  app.configuration.orm:
+    class: 'AppBundle\Configuration\ORMConfiguration'
+    parent: 'app.configuration.abstract'
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+    lazy: true
+
+  app.configuration: '@app.configuration.orm'

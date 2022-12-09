@@ -1,0 +1,14 @@
+.footer {
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 20px;
+    margin-bottom: 60px;
+    font-size: $font-size-xs;
+  }
+
+  &__item {
+    margin-inline-end: 1rem;
+  }
+}

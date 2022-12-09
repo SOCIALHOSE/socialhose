@@ -1,0 +1,12 @@
+{% trans_default_domain 'email' %}
+{% block body_text %}
+{% autoescape false %}
+{{- 'verification_success.message'|trans({
+    '%firstName%': user.firstName,
+    '%lastName%': user.lastName,
+    '%email%': user.email,
+    '%password%': password
+})
+-}}
+{% endautoescape %}
+{% endblock %}

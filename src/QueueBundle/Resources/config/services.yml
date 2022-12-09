@@ -1,0 +1,41 @@
+services:
+  queue.command.start_notification:
+    class: 'QueueBundle\Command\StartNotificationSendingCommand'
+    arguments:
+      - '@monolog.logger.queue_command'
+      - '@queue.producer.notifications_fetch'
+      - '@service_container'
+    tags:
+      - { name: console.command }
+
+  queue.consumer.documents_fetch:
+    class: 'QueueBundle\Consumer\DocumentsFetchConsumer'
+    arguments:
+      - '@monolog.logger.queue_command'
+      - '@doctrine.orm.default_entity_manager'
+      - '@app.stored_query_manager'
+
+  queue.consumer.documents_email:
+    class: 'QueueBundle\Consumer\DocumentsEmailConsumer'
+    arguments:
+      - '@monolog.logger.queue_command'
+      - '@doctrine.orm.default_entity_manager'
+      - '@user.mailer'
+
+  queue.consumer.notifications_fetch:
+    class: 'QueueBundle\Consumer\NotificationsFetcherConsumer'
+    arguments:
+      - '@monolog.logger.queue_command'
+      - '@doctrine.dbal.default_connection'
+      - '@queue.producer.notifications_send'
+      - '@service_container'
+
+  queue.consumer.notifications_send:
+    class: 'QueueBundle\Consumer\NotificationsSenderConsumer'
+    arguments:
+      - '@monolog.logger.queue_command'
+      - '@doctrine.orm.default_entity_manager'
+      - '@user.notification_manager'
+      - '@user.mailer'
+      - '@templating'
+      - '@service_container'

@@ -1,0 +1,40 @@
+{#
+
+    Footer component styles.
+
+#}
+
+.footer {
+    padding: 0 20px;
+{%- if themeType == 'plain' -%}
+    border-top: 3px double #FFF;
+{%- endif -%}
+    background: #e9e9ea;
+    height: 54px;
+    margin-top: 20px;
+    box-sizing: border-box;
+}
+
+.footer__list {
+    margin: 0;
+    padding: 0;
+}
+
+.footer__item {
+    display: inline-block;
+    margin-right: 5px;
+    padding: 0;
+}
+
+.footer__link {
+    text-shadow: 1px 2px 1px #FFF;
+    line-height: 49px;
+    display: block;
+    padding: 0 10px;
+    color: #373739;
+    font-size: 12px;
+}
+
+.footer__link:hover {
+    background: #D9D9D9;
+}

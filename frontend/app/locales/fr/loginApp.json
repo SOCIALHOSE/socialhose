@@ -1,0 +1,86 @@
+{
+  "signIn": "Se connecter",
+  "login": {
+    "mainLabel": "Se connecter",
+    "subLabel": "avec votre compte Socialhose.",
+    "noAccount": "Pas encore de compte ?",
+    "signUpNow": "Inscrivez-vous dès maintenant",
+    "form": {
+      "emailLabel": "E-mail",
+      "emailPlaceholder": "E-mail",
+      "passwordLabel": "Mot de passe",
+      "passwordPlaceholder": "Mot de passe"
+    },
+    "forgotPass": "Mot de passe oublié ?",
+    "signInBtn": "Se connecter"
+  },
+  "register": {
+    "passwordNotMatched": "La confirmation du mot de passe ne correspond pas",
+    "labels": {
+      "email": "E-mail",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "company": "Société",
+      "jobFunction": "Fonction d'emploi",
+      "employees": "Salariés",
+      "industry": "Secteur",
+      "websiteURL": "URL de site Web",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe"
+    },
+    "placeholders": {
+      "password": "Saisir le mot de passe",
+      "confirmPassword": "Confirmer le mot de passe"
+    },
+    "signInText": "Avez-vous déjà un compte ?",
+    "signInBtn": "Se connecter",
+    "loading": "Chargement en cours…",
+    "registerBtn": "S'inscrire",
+    "agreement": "En vous inscrivant, vous acceptez notre <1> Politique de confidentialité </1>, nos <2> Conditions générales </2> et notre <3> Politique d'utilisation acceptable </3>.",
+    "freeRegisterSuccess": "Vous vous êtes <1 /> enregistré avec succès sur SOCIALHOSE.IO avec un <2> Compte de base gratuit </2>.",
+    "paidRegisterSuccess": "Vous avez payé et vous êtes <1 /> enregistré avec succès sur SOCIALHOSE.IO.",
+    "successBottomText": "Vérifiez votre e-mail ({{email}}) pour un lien pour activer votre compte. S'il n'apparaît pas dans quelques minutes, vérifiez votre dossier spam.",
+    "verification": {
+      "failed": "Désolé, nous ne pouvons pas vérifier votre compte.",
+      "success": "Votre adresse email a été vérifiée avec succès.",
+      "loginBtn": "Se connecter maintenant"
+    }
+  },
+  "forgotPass": {
+    "mainLabel": "Mot de passe oublié ?",
+    "subLabel": "Utilisez le formulaire ci-dessous pour le récupérer.",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "E-mail",
+    "signIn": "Connectez-vous à votre compte existant",
+    "resetBtn": "Récupérer le mot de passe"
+  },
+  "resetPass": {
+    "mainLabel": "Réinitialiser le mot de passe",
+    "subLabel": "Utilisez le formulaire ci-dessous pour réinitialiser votre mot de passe.",
+    "newPasswordLabel": "Nouveau mot de passe",
+    "newPasswordPlaceholder": "Mot de passe",
+    "signIn": "Connectez-vous à votre compte existant",
+    "resetBtn": "Réinitialiser le mot de passe"
+  },
+  "footer": {
+    "privacyPolicy": "Politique de confidentialité",
+    "acceptableUsePolicy": "Politique d'utilisation acceptable",
+    "termsConditions": "Conditions générales",
+    "copyright": "Droit d'auteur ©  {{year}} SOCIALHOSE.IO. Tous droits réservés."
+  },
+  "commonSection": {
+    "insightsHeading": "Insights sur les consommateurs et le public",
+    "insightsText": "Connaissez votre public et segmentez-le pour mieux le comprendre et le toucher. Obtenez des informations sur les habitudes des consommateurs pour améliorer la création de contenu pertinent.",
+    "brandHeading": "Insights sur les consommateurs et le public",
+    "brandText": "Grâce à notre technologie, vous serez en mesure de gérer de manière transparente la présence en ligne de votre marque et d'obtenir instantanément des insights sur les conversations se déroulant autour de votre marque.",
+    "socialHeading": "Social Listening",
+    "socialText": "Votre accès à des données provenant de plusieurs réseaux sociaux est fourni par notre base de données Elasticsearch, ce qui la rend consultable à tout moment."
+  },
+  "errorMessages": {
+    "badCredentials": "The email or password is incorrect."
+  },
+  "messages": {
+    "forgotPasswordSubmit": "Check your email ({{email}}) for a link to reset your password. If it doesn’t appear within a few minutes, check your spam folder.",
+    "passwordUpdated": "You have successfully updated your password."
+  }
+}

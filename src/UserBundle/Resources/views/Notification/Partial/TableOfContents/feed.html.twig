@@ -1,0 +1,32 @@
+{#
+
+    Table of contents feed element.
+
+#}
+
+<div class="feed">
+    <span class="feed-name">
+        {{- feed.name -}}
+    </span>
+
+    {%- if showArticlesCount -%}
+        {%- if themeType == 'plain' -%}
+            <span class="feed-document-count">({{- feed.documentsCount }} articles)</span>
+        {%- else -%}
+            <span class="feed-document-count">{{- feed.documentsCount }} articles</span>
+        {%- endif -%}
+    {%- endif -%}
+
+    {%- if tableOfContents != 'simple' -%}
+        <ul class="documents">
+            {%- for document in feed.documents -%}
+                <li>
+                    {%- include _root ~ '/Partial/TableOfContents/document.html.twig' with {
+                        tableOfContents: tableOfContents,
+                        document: document
+                    } -%}
+                </li>
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+</div>

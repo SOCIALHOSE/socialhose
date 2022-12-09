@@ -1,0 +1,145 @@
+{#
+
+    Content component styles.
+
+#}
+{%- import _root ~ '/macros.css.twig' as macro -%}
+
+.content .feed-title {
+    {{- macro.renderFont(fonts.feedTitle) -}}
+    margin-top: 5px;
+    {%- if themeType == 'enhanced' -%}
+        background: {{- colors.background.accent|raw -}};
+        padding: 10px;
+        color: {{- colors.text.header|raw -}};
+    {%- endif -%}
+}
+
+.content .feed-title img {
+    padding-right: 10px;
+}
+
+.content .feed-divider {
+    margin: 1.8em 0.4em 1em;
+    border-bottom: 1px solid black;
+    display: block;
+    color: rgb(55, 55, 57);
+}
+
+.content .documents .document {
+{%- if themeType == 'plain'-%}
+    margin-top: 10px;
+    margin-left: 5px;
+{%- else -%}
+    margin-top: 5px;
+    display: flex;
+    flex: auto;
+{%- endif -%}
+}
+
+{%- if themeType == 'plain' -%}
+.content .documents .document:last-child {
+    margin-bottom: 25px;
+}
+{%- endif -%}
+
+{%- if themeType == 'enhanced' -%}
+.content .documents .document-aside {
+    padding: 10px 5px 2px 5px;
+}
+
+.content .documents .document-main {
+    padding: 0 5px 10px 0;
+    background: white;
+    border-bottom: 1px solid #e6e6e6;
+    display: flex;
+    width: 100%;
+}
+.content .documents .document-body {
+    flex: auto;
+    padding: 8px;
+}
+
+.content .documents .document-image {
+    flex-basis: 170px;
+}
+
+.content .documents .document-image img {
+    width: 160px;
+}
+{%- endif -%}
+
+.content .documents .document-headline a,
+.content .documents .document-headline a:hover,
+.content .documents .document-headline a:visited,
+.content .documents .document-headline a:active {
+    {{- macro.renderFont(fonts.articleHeadline) -}}
+    color: {{- colors.text.articleHeadline|raw -}};
+}
+
+.content .documents .document-headline,
+.content .documents .document-info {
+    margin-bottom: 5px;
+}
+
+.content .documents .document-source {
+    color: {{- colors.text.source|raw -}};
+    {{- macro.renderFont(fonts.source) -}};
+}
+
+.content .documents .document-author {
+    color: {{- colors.text.author|raw -}};
+    {{- macro.renderFont(fonts.author) -}};
+}
+
+.content .documents .document-date {
+    {%- if themeType == 'plain' -%}
+        color: {{- colors.text.publishDate|raw -}};
+    {%- else -%}
+        color: {{- colors.text.articleContent|raw -}};
+    {%- endif -%}
+    {{- macro.renderFont(fonts.date) -}};
+}
+
+.content .document .document-content {
+    {{- macro.renderFont(fonts.articleContent) -}};
+    text-align: justify;
+}
+
+.content .comments {
+    padding-left: 20px;
+}
+
+.content .comments .comment {
+    margin-top: 15px;
+}
+
+{%- if themeType == 'enhanced' -%}
+.content .comments .comment-title {
+    font-weight: bold;
+}
+{%- endif -%}
+
+.content .comments .comment-author {
+    color: {{- colors.text.author|raw -}};
+{%- if themeType == 'plain' -%}
+{{- macro.renderFont(fonts.author) -}};
+{%- endif -%}
+}
+
+.content .comments .comment-date {
+{%- if themeType == 'plain' -%}
+    color: {{- colors.text.publishDate|raw -}};
+    {{- macro.renderFont(fonts.date) -}};
+{%- else -%}
+    color: {{- colors.text.articleContent|raw -}};
+{%- endif -%}
+}
+
+.content .comments .comment-info {
+    margin: 5px 0 ;
+}
+
+.content .comments .comment-body {
+    padding-left: 20px;
+}

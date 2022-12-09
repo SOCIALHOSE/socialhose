@@ -1,0 +1,22 @@
+.registration {
+  .forms-wizard li {
+    vertical-align: top;
+
+    &:after,
+    &:before {
+      top: 50px;
+    }
+
+    &.form-wizard-step-doing {
+      font-weight: bold;
+    }
+  }
+}
+
+.total-price {
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  box-shadow: 0 -2px 0.5rem rgba($black, 0.15);
+  border-top: 4px solid $primary;
+}

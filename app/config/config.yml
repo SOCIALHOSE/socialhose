@@ -1,0 +1,252 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+
+parameters:
+    locale: en
+
+framework:
+    secret: "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form: ~
+    translator:
+      fallback: "%locale%"
+    csrf_protection: { enabled: false }
+    validation:      { enable_annotations: true }
+    serializer:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        handler_id:  session.handler.native_file
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+    fragments:       ~
+    http_method_override: true
+
+# Monolog Configuration
+monolog:
+    # Define new channel for errors occurred in api methods.
+    channels: [ 'api_error', 'es_error', 'queue_command', 'mailer', 'payment_api' ]
+    handlers:
+        api_exceptions:
+            type: rotating_file
+            path: "%kernel.logs_dir%/%kernel.environment%_api_error.log"
+            level: debug
+            # Store log for 10 days.
+            max_files: 10
+            channels: [ 'api_error' ]
+            formatter: 'app.formatter.trace'
+
+        # Log all notifications received from elasticsearch.
+        notification:
+            type: rotating_file
+            path: "%kernel.logs_dir%/%kernel.environment%_es_error.log"
+            level: error
+            # Store log for 10 days.
+            max_files: 10
+            channels: [ 'es_error' ]
+            formatter: 'api.log_formatter.api_errors'
+
+        # Log all notifications received from queue command.
+        queue_command:
+            type: rotating_file
+            path: "%kernel.logs_dir%/%kernel.environment%_queue_command.log"
+            level: error
+            # Store log for 10 days.
+            max_files: 10
+            channels: [ 'queue_command' ]
+            formatter: 'app.formatter.trace'
+
+        payment_api:
+          type: rotating_file
+          path: "%kernel.logs_dir%/payment_api.log"
+          level: info
+          # Store log for 10 days.
+          max_files: 10
+          channels: [ 'payment_api' ]
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    form_themes:
+        - 'bootstrap_3_layout.html.twig'
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   pdo_mysql
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+        options:
+            1002: 'SET sql_mode=(SELECT REPLACE(@@sql_mode, "ONLY_FULL_GROUP_BY", ""))'
+        schema_filter: '/^(?!internal_)/'
+
+        types:
+            datetimezone: 'AppBundle\Doctrine\DBAL\Types\DateTimeZoneType'
+            theme_type: 'UserBundle\Doctrine\DBAL\Types\ThemeTypeEnumType'
+            notification_type: 'UserBundle\Doctrine\DBAL\Types\NotificationTypeEnumType'
+            payment_gateway: 'PaymentBundle\Doctrine\DBAL\Types\PaymentGatewayEnumType'
+            payment_status: 'PaymentBundle\Doctrine\DBAL\Types\PaymentStatusEnumType'
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+        default_repository_class: AppBundle\Doctrine\ORM\BaseEntityRepository
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    port:      "%mailer_port%"
+    encryption: tls
+    spool:      { type: memory }
+
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: UserBundle\Entity\User
+
+    use_authentication_listener: false
+
+    service:
+      user_manager: 'user.user_manager'
+
+    from_email:
+        address: 'not used'
+        sender_name: 'not used'
+
+    registration:
+        form:
+            type: UserBundle\Form\RegistrationType
+            name: registration
+        confirmation:
+            # Disable standard FOSUserBundle registration confirmation.
+            # In our application we use different registration logic.
+            # see UserBundle\EventListener\UserSubscriber::onRegistrationSuccess
+            enabled: true
+            template:   UserBundle:Registration:email.txt.twig
+
+knp_paginator:
+    template:
+        pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
+
+lexik_jwt_authentication:
+    private_key_path: '%jwt_private_key_path%'
+    public_key_path:  '%jwt_public_key_path%'
+    pass_phrase:      '%jwt_key_pass_phrase%'
+    token_ttl:        '%jwt_token_ttl%'
+
+gesdinet_jwt_refresh_token:
+    ttl: 2592000
+    ttl_update: true
+    # If not set, refresh token will create default symfony user.
+    user_provider: authentication_bundle.user_provider
+
+miracode_stripe:
+    secret_key: "%stripe_secret_key%"
+        
+nelmio_cors:
+    paths:
+        '^/(api|security)':
+            allow_credentials: true
+            allow_origin: [ '*' ]
+            allow_headers: ['X-Custom-Auth', 'Accept', 'Authorization', 'Content-Type']
+            allow_methods: [ 'POST', 'PUT', 'GET', 'DELETE' ]
+            max_age: 3600
+
+ivory_ck_editor:
+    configs:
+        default:
+            toolbar: [ [ 'Cut','Copy','Paste','Undo','Redo' ], [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ], [ 'NumberedList','BulletedList','-','Outdent','Indent','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock' ], [ 'Styles','Format','Font','FontSize' ], [ 'TextColor','BGColor' ] ]
+
+old_sound_rabbit_mq:
+  connections:
+    default:
+      host:     '%rabbit_mq.host%'
+      port:     '%rabbit_mq.port%'
+      user:     '%rabbit_mq.username%'
+      password: '%rabbit_mq.password%'
+      vhost:    '/'
+      lazy:     false
+      connection_timeout: 3
+      read_write_timeout: 3
+      keepalive: false
+  producers:
+    documents_fetch:
+      connection: 'default'
+      exchange_options:
+        name: 'documents_fetch'
+        type: 'direct'
+      service_alias: 'queue.producer.documents_fetch'
+
+    documents_email:
+      connection: 'default'
+      exchange_options:
+        name: 'documents_email'
+        type: 'direct'
+      service_alias: 'queue.producer.documents_email'
+
+    notifications_fetch:
+      connection: 'default'
+      exchange_options:
+        name: 'notifications_fetch'
+        type: 'direct'
+      service_alias: 'queue.producer.notifications_fetch'
+
+    notifications_send:
+      connection: 'default'
+      exchange_options:
+        name: 'notifications_send'
+        type: 'direct'
+      service_alias: 'queue.producer.notifications_send'
+
+  consumers:
+    documents_fetch:
+      connection: 'default'
+      exchange_options:
+        name: 'documents_fetch'
+        type: 'direct'
+      queue_options:
+        name: 'documents_fetch'
+      callback: 'queue.consumer.documents_fetch'
+
+    documents_email:
+      connection: 'default'
+      exchange_options:
+        name: 'documents_email'
+        type: 'direct'
+      queue_options:
+        name: 'documents_email'
+      callback: 'queue.consumer.documents_email'
+
+    notifications_fetch:
+      connection: 'default'
+      exchange_options:
+        name: 'notifications_fetch'
+        type: 'direct'
+      queue_options:
+        name: 'notifications_fetch'
+      callback: 'queue.consumer.notifications_fetch'
+
+    notifications_send:
+      connection: 'default'
+      exchange_options:
+        name: 'notifications_send'
+        type: 'direct'
+      queue_options:
+        name: 'notifications_send'
+      callback: 'queue.consumer.notifications_send'

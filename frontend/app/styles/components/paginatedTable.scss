@@ -1,0 +1,243 @@
+/* .paginated-table {
+  font-size: 13px;
+
+  &-top-table {
+    // transform: translate(0px, -30px);
+  }
+
+  &-top-panel {
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+    height: 44px;
+    -ms-flex-pack: justify;
+    justify-content: flex-end;
+    vertical-align: middle;
+    margin: 5px 0;
+    transform: translate(50%, -50px);
+    width: 40%;
+
+    &__buttons {
+      float: left;
+
+      button {
+        margin-inline-end: 7px;
+      }
+    }
+
+    &__text {
+      float: right;
+      padding: 4px;
+    }
+  }
+
+  &__headers {
+    // border-top: 2px solid #bcbec0;
+    border-bottom: 1px solid #bcbec0;
+    width: 100%;
+
+    th {
+      text-align: start;
+      padding-inline-start: 5px;
+      vertical-align: middle;
+      height: 29px;
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    .sorting-icon {
+      padding-inline-start: 4px;
+      cursor: pointer;
+    }
+  }
+
+  &__scroll {
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+    border: 1px solid #bcbec0;
+    border-left: 0;
+    border-right: 0;
+    max-height: 300px;
+  }
+
+  &__body {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  &__row {
+    border-bottom: 1px solid #bcbec0;
+
+    td {
+      height: 29px;
+      padding-inline-start: 5px;
+      text-align: start;
+      vertical-align: middle;
+    }
+
+    td:last-child {
+      cursor: pointer;
+    }
+  }
+} */
+
+.ReactTable.cw-grid {
+  // width: 100%;
+  // border: 0;
+
+  .rt-thead {
+    &.-header {
+      box-shadow: none;
+      /* background: #ececec;
+      padding: 0.55rem;
+      line-height: normal;
+      position: relative;
+      font-weight: bold;
+      border-right: 1px solid #e9ecef;
+      border-bottom: 1px solid #e9ecef;
+      transition: box-shadow 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: inset 0 0 0 0 transparent;
+      color: #545cd8; */
+    }
+
+    .rt-th {
+      padding: 10px 8px;
+      text-align: start;
+
+      &.-sort-asc,
+      &.-sort-desc {
+        box-shadow: none;
+      }
+
+      .sortable-th {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .sorting-icon {
+        padding-inline-start: 5px;
+      }
+
+      // default sorting
+      .fa-sort-asc,
+      .fa-sort-desc {
+        display: none;
+      }
+
+      .fa-sort {
+        display: block;
+      }
+
+      // asc sorting
+      &.-sort-asc {
+        .fa-sort,
+        .fa-sort-desc {
+          display: none;
+        }
+
+        .fa-sort-asc {
+          display: block;
+        }
+      }
+
+      // desc sorting
+      &.-sort-desc {
+        .fa-sort,
+        .fa-sort-asc {
+          display: none;
+        }
+
+        .fa-sort-desc {
+          display: block;
+        }
+      }
+    }
+  }
+/* 
+  .rt-tbody {
+    .rt-td {
+      border-right: 0;
+      line-height: 33px;
+      padding: 0 0 0 5px;
+      font-size: 16px;
+    }
+
+    .rt-tr-group {
+      border-bottom: 1px solid #ddd;
+      height: 3.5rem;
+    }
+
+    .rt-tr {
+      height: 40px;
+      align-items: center;
+
+      &.-even {
+        background: #f7f7f7;
+      }
+    }
+  } */
+
+  .rt-thead .cw-center-cell,
+  .rt-tbody .cw-center-cell {
+    display: flex;
+    justify-content: center;
+  }
+}
+.cw-grid__filter {
+  float: left;
+  display: flex;
+  margin-inline-end: 10px;
+
+  .cw-grid__filter-input {
+    line-height: 18px;
+  }
+
+  .cw-grid__filter-button {
+    background: #e9e9ea;
+    border: 1px solid #bcbec0;
+    border-radius: 0;
+    color: #6e6e71;
+    cursor: pointer;
+    font-size: 14px;
+    height: 30px;
+    margin-inline-start: -1px;
+    padding: 0;
+    transition: none;
+    width: 32px;
+  }
+}
+
+.sources-table {
+  flex-grow: 1;
+  font-size: 14px;
+
+  .rt-td {
+    white-space: normal;
+  }
+}
+
+.results-table-count-info {
+  font-size: 14px;
+  margin: 20px 0 0;
+
+  span {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 0.88rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: start;
+    background-color: #fff;
+    padding: 3px 0 0;
+    font-size: 0.88rem;
+    opacity: 0.6;
+  }
+}

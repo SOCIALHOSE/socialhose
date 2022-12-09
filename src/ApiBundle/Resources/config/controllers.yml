@@ -1,0 +1,19 @@
+services:
+    #
+    # Base api controllers.
+    #
+    api.controller.abstract:
+        class: 'ApiBundle\Controller\AbstractApiController'
+        arguments:
+            - '@service_container'
+        abstract: true
+
+    #
+    # Base CRUD controllers.
+    #
+    api.controller.abstract_crud:
+        class: 'ApiBundle\Controller\AbstractCRUDController'
+        arguments:
+            - '@service_container'
+            - # injects by concrete class.
+        abstract: true

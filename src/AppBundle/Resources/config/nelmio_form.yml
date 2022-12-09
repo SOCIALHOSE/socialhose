@@ -1,0 +1,12 @@
+#
+# Hack for avoiding errors related to 'unknown description field' on production
+# where we don't load NelmioApiDocBundle
+#
+services:
+  nelmio_api_doc.form.extension.description_form_type_extension:
+    class: 'Nelmio\ApiDocBundle\Form\Extension\DescriptionFormTypeExtension'
+    tags:
+      -
+        name: 'form.type_extension'
+        alias: 'form'
+        extended_type: 'Symfony\Component\Form\Extension\Core\Type\FormType'

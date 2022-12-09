@@ -1,0 +1,19 @@
+{% trans_default_domain 'email' %}
+{% block subject %}
+{%- autoescape false -%}
+{{- 'resetting.subject'|trans({
+    '%firstName%': user.firstName,
+    '%lastName%': user.lastName
+}) -}}
+{%- endautoescape -%}
+{% endblock %}
+
+{% block body_text %}
+{% autoescape false %}
+{{- 'resetting.message'|trans({
+    '%firstName%': user.firstName,
+    '%lastName%': user.lastName,
+    '%confirmationUrl%': confirmationUrl
+}) -}}
+{% endautoescape %}
+{% endblock %}

@@ -1,0 +1,8 @@
+[program:documents_email]
+directory={{CWD}}
+command={{CWD}}/bin/console --env=stage rabbitmq:consumer documents_email
+environment=
+user=socialhose
+autostart=true
+autorestart=true
+redirect_stderr=True

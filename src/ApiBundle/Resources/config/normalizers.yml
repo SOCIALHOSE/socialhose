@@ -1,0 +1,56 @@
+services:
+    #
+    # Entity normalizer.
+    #
+    api.normalizer.entity:
+        class: 'ApiBundle\Serializer\Normalizer\EntityNormalizer'
+        tags:
+            - { name: serializer.normalizer }
+
+    #
+    # Enum normalizer.
+    #
+    api.normalizer.enum:
+        class: 'ApiBundle\Serializer\Normalizer\EnumNormalizer'
+        tags:
+            - { name: serializer.normalizer }
+
+    #
+    # ThemeOptionFont normalizer.
+    #
+    api.normalizer.theme_option_font:
+        class: 'ApiBundle\Serializer\Normalizer\ThemeOptionFontNormalizer'
+        tags:
+            - { name: serializer.normalizer }
+
+    #
+    # Form normalizer.
+    #
+    api.normalizer.form:
+        class: 'ApiBundle\Serializer\Normalizer\FormNormalizer'
+        tags:
+            - { name: serializer.normalizer }
+
+    #
+    # Paginator normalizer.
+    #
+    api.normalizer.paginator:
+        class: 'ApiBundle\Serializer\Normalizer\PaginationNormalizer'
+        tags:
+            - { name: serializer.normalizer }
+
+    #
+    # Index document normalizer.
+    #
+    api.normalizer.index_document:
+        class: 'ApiBundle\Serializer\Normalizer\DocumentNormalizer'
+        tags:
+            - { name: serializer.normalizer }
+
+    #
+    # Empty object normalizer.
+    #
+    api.normalizer.empty_object:
+        class: 'ApiBundle\Serializer\Normalizer\EmptyObjectNormalizer'
+        tags:
+            - { name: serializer.normalizer }

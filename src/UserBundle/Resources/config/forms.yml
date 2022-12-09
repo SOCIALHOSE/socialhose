@@ -1,0 +1,52 @@
+imports:
+  - { resource: controllers.yml }
+
+services:
+  user.form.registration:
+    class: 'UserBundle\Form\RegistrationType'
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+    tags:
+      - { name: form.type }
+  user.form.hubspot_registration:
+    class: 'UserBundle\Form\HubSpotRegistrationType'
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+    tags:
+      - { name: form.type }
+
+  user.form.sources:
+    class: 'UserBundle\Form\Type\SourcesType'
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@security.token_storage'
+    tags:
+      - { name: form.type }
+
+  user.form.change_password:
+    class: 'UserBundle\Form\ChangePasswordType'
+    arguments:
+      - '@security.password_encoder'
+    tags:
+      - { name: form.type }
+
+  user.form.person_recipient:
+    class: 'UserBundle\Form\PersonRecipientType'
+    arguments:
+      - '@security.token_storage'
+    tags:
+      - { name: form.type }
+
+  user.form.group_recipient:
+    class: 'UserBundle\Form\GroupRecipientType'
+    arguments:
+      - '@security.token_storage'
+    tags:
+      - { name: form.type }
+
+  user.form.payment_data:
+    class: 'UserBundle\Form\PaymentDataType'
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+    tags:
+      - { name: form.type }

@@ -1,0 +1,56 @@
+{#
+
+    Header component styles.
+
+#}
+{%- import _root ~ '/macros.css.twig' as macro -%}
+
+{% set headerHeight = '105px' %}
+
+.email-header {
+    {%- if themeType == 'plain' -%}
+        color: white;
+        {%- if imageUrl != '' -%}height: {{- headerHeight -}};{%- endif -%}
+    {%- else -%}
+        height: {{- headerHeight -}};
+        background: {{- colors.background.header|raw -}};
+    {%- endif -%}
+}
+
+.email-header-logo {
+    display: inline-block;
+    height: 100%;
+    width: 75%;
+    border: none;
+}
+.email-header-logo img {
+    padding-top: 25px;
+    padding-left: 26px;
+    vertical-align: top;
+}
+
+.email-header-info {
+    text-align: right;
+    float: right;
+    display: inline-block;
+    width: 25%;
+    height: 80%;
+    border: none;
+    position: relative;
+}
+
+.email-header-info-title {
+    {{- macro.renderFont(fonts.header) -}}
+    color: {{- colors.text.header|raw -}};
+    margin-bottom: 5px;
+}
+
+.email-header-info-date {
+    color: {{- colors.background.accent|raw -}};
+}
+
+.email-header-info-content {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+}

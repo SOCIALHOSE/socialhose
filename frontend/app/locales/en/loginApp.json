@@ -1,0 +1,86 @@
+{
+  "signIn": "Sign In",
+  "login": {
+    "mainLabel": "Sign in",
+    "subLabel": "with your Socialhose Account.",
+    "noAccount": "No account?",
+    "signUpNow": "Sign up now",
+    "form": {
+      "emailLabel": "Email",
+      "emailPlaceholder": "Email",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Password"
+    },
+    "forgotPass": "Forgot your Password?",
+    "signInBtn": "Sign In"
+  },
+  "register": {
+    "passwordNotMatched": "Confirm Password does not match.",
+    "labels": {
+      "email": "Email",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "company": "Company",
+      "jobFunction": "Job Function",
+      "employees": "Employees",
+      "industry": "Industry",
+      "websiteURL": "Website URL",
+      "password": "Password",
+      "confirmPassword": "Confirm Password"
+    },
+    "placeholders": {
+      "password": "Enter Password",
+      "confirmPassword": "Confirm Password"
+    },
+    "signInText": "Already have an account?",
+    "signInBtn": "Sign in",
+    "loading": "Loading...",
+    "registerBtn": "Register",
+    "agreement": "By registering, you agree to our <1>Privacy Policy</1>, <2>Terms & Conditions</2> and <3>Acceptable Use Policy</3>.",
+    "freeRegisterSuccess": "You have successfully <1 /> registered to SOCIALHOSE.IO with a <2>Free Basic Account</2>.",
+    "paidRegisterSuccess": "You have successfully paid and <1 /> registered to SOCIALHOSE.IO.",
+    "successBottomText": "Check your email ({{email}}) for a link to activate your account. If it doesn’t appear within a few minutes, check your spam folder.",
+    "verification": {
+      "failed": "Sorry, we cannot verify your account.",
+      "success": "You have successfully verified your email address.",
+      "loginBtn": "Login Now"
+    }
+  },
+  "forgotPass": {
+    "mainLabel": "Forgot your Password?",
+    "subLabel": "Use the form below to recover it.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Email",
+    "signIn": "Sign in to existing account",
+    "resetBtn": "Recover Password"
+  },
+  "resetPass": {
+    "mainLabel": "Reset Password",
+    "subLabel": "Use the form below to reset the password.",
+    "newPasswordLabel": "New Password",
+    "newPasswordPlaceholder": "Password",
+    "signIn": "Sign in to existing account",
+    "resetBtn": "Reset Password"
+  },
+  "footer": {
+    "privacyPolicy": "Privacy Policy",
+    "acceptableUsePolicy": "Acceptable Use Policy",
+    "termsConditions": "Terms & Conditions",
+    "copyright": "Copyright © {{year}} SOCIALHOSE.IO. All rights reserved."
+  },
+  "commonSection": {
+    "insightsHeading": "Consumer and Audience Insights",
+    "insightsText": "Know your audience and segment them so you can better understand and reach them. Gain insights into consumer habits to better create relevant content.",
+    "brandHeading": "Consumer and Audience Insights",
+    "brandText": "With our technology, you'll be able to seamlessly manage your brand's online presence and get insights into conversations happening around your brand instantaneously.",
+    "socialHeading": "Social Listening",
+    "socialText": "Your access to a data from multiple social networks is provided by our Elasticsearch database, making it searchable at all times."
+  },
+  "errorMessages": {
+    "badCredentials": "The email or password is incorrect."
+  },
+  "messages": {
+    "forgotPasswordSubmit": "Check your email ({{email}}) for a link to reset your password. If it doesn’t appear within a few minutes, check your spam folder.",
+    "passwordUpdated": "You have successfully updated your password."
+  }
+}

@@ -1,0 +1,32 @@
+{#
+    Content component.
+#}
+{%- set isPlain = themeType == 'plain' -%}
+
+<div class="content">
+    {%- for feed in feeds -%}
+        <div class="feed">
+            <div class="feed-title">
+                {%- if not isPlain -%}
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAGCAQAAABUDBdwAAAAOElEQVQI12NgYPh/8//3/zAwlQEo0PwfAZxAAnb/T8Pk/9sxgMB/HyR5BoiaOiB3MlQeKrQaIg8Aiig6G17xrxEAAAAASUVORK5CYII=">
+                {%- endif -%}
+                {{- feed.name -}}
+                {%- if isPlain -%}:{%- endif -%}
+            </div>
+        </div>
+        <div class="documents">
+            {%- for document in feed.documents -%}
+                {%- include _root ~ '/Partial/Content/document.html.twig' with {
+                    document: document,
+                    showImages: showImages,
+                    showSourceCountry: showSourceCountry,
+                    showUserComments: showUserComments,
+                    themeType: themeType
+                } -%}
+            {%- endfor -%}
+        </div>
+        {%- if showSectionDivider and not loop.last and isPlain -%}
+            <div class="feed-divider"></div>
+        {%- endif -%}
+    {%- endfor -%}
+</div>

@@ -1,0 +1,16 @@
+{#
+
+    Table of contents document element.
+
+#}
+<div class="document">
+    <a href="{{- document.permalink -}}">
+        {%- if tableOfContents == 'headline_source_date' -%}
+            {{- document.title }} | <span class="source">{{ document.source.title }}</span> | {{ document.published|date('F d, Y H:i') -}}
+        {%- elseif tableOfContents == 'source_headline_date' -%}
+            <span class="source">{{- document.source.title }}</span> | {{ document.title }} | {{ document.published|date('F d, Y H:i') -}}
+        {%- else -%}
+            {{- document.title -}}
+        {%- endif -%}
+    </a>
+</div>

@@ -1,0 +1,59 @@
+{% extends "AdminBundle::layout-inner.html.twig" %}
+
+{% block inner_content %}
+    <h1>
+        Organization {{ organization.name -}}
+    </h1>
+
+    {{- form_start(form) -}}
+    {{- form_widget(form) -}}
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    {{ knp_pagination_sortable(subscriptions, 'Address', 'Subscription.organizationAddress') }}
+                </th>
+                <th>
+                    {{ knp_pagination_sortable(subscriptions, 'Owner', 'Owner.email') }}
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {%- for subscription in subscriptions -%}
+                <tr>
+                    <td>
+                        {{- subscription.organizationAddress -}}
+                    </td>
+                    <td>
+                        <a href="{{ path('admin_user_master_show', { 'id': subscription.owner.id }) }}">
+                            {{- subscription.owner.email -}}
+                        </a>
+                    </td>
+                    <td>
+                        <button type="button" data-href="{{- path('admin_organization_subscriptiondelete', {
+                            'organizationId': organization.id,
+                            'subscriptionId': subscription.id
+                        }) -}}" class="btn btn-danger btn-block btn-delete">Delete</button>
+                    </td>
+                </tr>
+            {%- endfor -%}
+        </tbody>
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(subscriptions) }}
+    </div>
+
+    <button type="submit" class="btn btn-success">Edit</button>
+    <a class="btn btn-default" href="{{- path('admin_organization_index') -}}">Back</a>
+    {{- form_end(form) -}}
+{% endblock %}
+
+{% block javascripts %}
+    {{- parent() -}}
+    <script src="{{ asset('/bundles/admin/js/common_crud.js') }}"></script>
+{% endblock javascripts %}

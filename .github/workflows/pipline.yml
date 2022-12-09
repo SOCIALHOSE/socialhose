@@ -1,0 +1,76 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy-Pipline-To-AWS-EC2
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the symfony_3.4 branch
+on:
+  push:
+    branches: [ symfony_3.4 ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  deploy:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      #       - name: Test script
+      #         run: cp app/config/parameters.yml.production app/config/parameters.yml
+
+      #       - name: Frontend install
+      #         run:  cp frontend/app/appConfig.js.production frontend/app/appConfig.js
+      #       - run: cd frontend && npm install
+      #       - run: cd frontend && npm run build
+
+      - name: ssh scp ssh pipelines
+        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+        env:
+          WELCOME: "ssh scp ssh pipelines"
+          LASTSSH: "Doing something after copying"
+        with:
+          host: 3.138.54.84
+          user: deploy
+          pass: eivuz6Ai
+          connect_timeout: 10s
+          first_ssh: |
+            cd /var/www/html
+            echo eivuz6Ai | sudo -S rm -r app
+            echo eivuz6Ai | sudo -S rm -r behat
+            echo eivuz6Ai | sudo -S rm -r behat.yml
+            echo eivuz6Ai | sudo -S rm -r bin
+            echo eivuz6Ai | sudo -S rm -r Capfile
+            echo eivuz6Ai | sudo -S rm -r composer.json
+            echo eivuz6Ai | sudo -S rm -r composer.lock
+            echo eivuz6Ai | sudo -S rm -r configuration
+            echo eivuz6Ai | sudo -S rm -r deploy-aws.sh
+            echo eivuz6Ai | sudo -S rm -r docker
+            echo eivuz6Ai | sudo -S rm -r docker-compose.yml
+            echo eivuz6Ai | sudo -S rm -r frontend
+            echo eivuz6Ai | sudo -S rm -r phpunit.xml.dist
+            echo eivuz6Ai | sudo -S rm -r README.md
+            echo eivuz6Ai | sudo -S rm -r hose_external_schema.json
+            echo eivuz6Ai | sudo -S rm -r src
+            echo eivuz6Ai | sudo -S rm -r supervisor-start.sh
+            echo eivuz6Ai | sudo -S rm -r tests
+            echo eivuz6Ai | sudo -S rm -r update.sh
+            echo eivuz6Ai | sudo -S rm -r web
+          scp: |
+            '*' => /var/www/html
+          last_ssh: |
+            cp /var/www/html/app/config/parameters.yml.production /var/www/html/app/config/parameters.yml
+            cd /var/www/html && composer install
+            cd /var/www/html && php bin/console doctrine:migrations:migrate --no-interaction
+            cp /var/www/html/frontend/app/appConfig.js.production /var/www/html/frontend/app/appConfig.js
+            cd /var/www/html/frontend && npm install
+            cd /var/www/html/frontend && npm run build
+            echo eivuz6Ai | sudo -S chown -R apache:apache /var/www/html/web
+            cd /var/www/html && php bin/console cache:clear --env=prod --no-debug
+            rm -r /var/www/html/var/cache/stage/*
+            . /var/www/deploy-aws.sh

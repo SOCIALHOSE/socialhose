@@ -1,0 +1,11 @@
+{% extends "AdminBundle::layout.html.twig" %}
+
+{% block content %}
+
+{{ include("AdminBundle:Security:login_content.html.twig", {
+    "error": error,
+    "last_username": last_username,
+    "csrf_token": csrf_token
+}) }}
+
+{% endblock %}

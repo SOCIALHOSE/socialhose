@@ -1,0 +1,30 @@
+{% extends "AdminBundle::layout-inner.html.twig" %}
+
+{% block inner_content %}
+    <h1>
+        Billing plans
+    </h1>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for plan in plans %}
+            <tr>
+                <td>{{ plan.title }}</td>
+                <td>
+                    $ {{ plan.price|number_format(2) -}}
+                </td>
+                <td>
+                    <a class="btn btn-info btn-block" href="{{ path('admin_plan_edit', { 'id': plan.id }) }}">Edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

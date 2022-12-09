@@ -1,0 +1,113 @@
+{
+    "name": "socialhose/backend",
+    "license": "proprietary",
+    "description": "social listening and analytics",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "": [ "src/", "behat/" ]
+        },
+        "files": [
+            "src/AppFunctional/import.php"
+        ],
+        "classmap": [
+            "app/AppKernel.php",
+            "app/AppCache.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "7.2"
+        }
+    },
+    "require": {
+        "php": ">=7.2",
+        "symfony/symfony": "3.4.*",
+        "doctrine/orm": "^2.5",
+        "doctrine/doctrine-bundle": "1.6.7",
+        "doctrine/doctrine-cache-bundle": "^1.2",
+        "symfony/swiftmailer-bundle": "^2.3",
+        "symfony/monolog-bundle": "^2.8",
+        "sensio/distribution-bundle": "^5.0",
+        "sensio/framework-extra-bundle": "^3.0.2",
+        "incenteev/composer-parameter-handler": "^2.0",
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "doctrine/doctrine-migrations-bundle": "^1.2",
+        "symfony/assetic-bundle": "^2.8",
+        "guzzlehttp/guzzle": "~6.5",
+        "elasticsearch/elasticsearch": "~5.3",
+        "knplabs/knp-paginator-bundle": "~2.5.3",
+        "fzaninotto/faker": "~1.6",
+        "lexik/jwt-authentication-bundle": "~2.10.7",
+        "gesdinet/jwt-refresh-token-bundle": "0.1.8",
+        "nelmio/cors-bundle": "~1.5",
+        "nelmio/api-doc-bundle": "~2.13.0",
+        "seld/jsonlint": "1.5.*",
+        "php-amqplib/php-amqplib": "^2.6",
+        "egeloen/ckeditor-bundle": "^5.0",
+        "php-amqplib/rabbitmq-bundle": "^1.13",
+        "php-http/guzzle6-adapter": "^1.1",
+        "ihor/nspl": "^1.2",
+        "nochso/html-compress-twig": "^2.0",
+        "paypal/rest-api-sdk-php": "~1.14",
+        "prewk/option": "^0.0.5",
+        "slowprog/composer-copy-file": "^0.2.1",
+        "miracode/stripe-bundle": "^1.0"
+    },
+    "require-dev": {
+        "sensio/generator-bundle": "^3.0",
+        "symfony/phpunit-bridge": "^3.0",
+        "phpunit/phpunit": "^5.6.1",
+        "behat/behat": "^3",
+        "behat/symfony2-extension": "^2.1.",
+        "doctrine/doctrine-fixtures-bundle": "~2.3",
+        "coduo/php-matcher": "2.1.x-dev"
+    },
+    "scripts": {
+        "behat-test": [
+            "./vendor/bin/behat -s api --format progress --colors",
+            "./vendor/bin/behat -s command --format progress --colors"
+        ],
+        "unit-test": [
+            "./vendor/bin/phpunit --colors=always"
+        ],
+        "test": [
+            "@unit-test",
+            "@behat-test"
+        ],
+        "copy-assets": [
+            "SlowProg\\CopyFile\\ScriptHandler::copy"
+        ],
+        "scripts": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget",
+            "@copy-assets"
+        ],
+        "post-install-cmd": [ "@scripts" ],
+        "post-update-cmd": [ "@scripts" ]
+    },
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-bin-dir": "bin",
+        "symfony-var-dir": "var",
+        "symfony-web-dir": "web",
+        "symfony-tests-dir": "tests",
+        "symfony-assets-install": "relative",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml",
+            "keep-outdated": true
+        },
+        "copy-file": {
+            "src/UserBundle/Resources/views/Notification": "web/twig"
+        }
+    }
+}

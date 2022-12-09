@@ -1,0 +1,53 @@
+services:
+  app.command.fetch_sources:
+    class: 'AppBundle\Command\FetchSourcesCommand'
+    arguments:
+      - '@app.source_manager'
+      - '@monolog.logger.queue_command'
+    tags:
+      - { name: console.command }
+
+  app.command.generate:
+    class: 'AppBundle\Command\GenerateCommand'
+    arguments:
+      - '@index.external.internal_hose'
+    tags:
+      - { name: console.command }
+
+  app.command.reindex_documents:
+    class: 'AppBundle\Command\ReindexDocumentsCommand'
+    arguments:
+      - '@monolog.logger.queue_command'
+      - '%cache_index.host%'
+      - '%cache_index.port%'
+      - '%kernel.root_dir%/../var'
+    tags:
+      - { name: console.command }
+
+  app.command.load_data_fixtures:
+    class: 'AppBundle\Command\LoadDataFixturesCommand'
+    arguments:
+      - '@kernel'
+      - '@doctrine.orm.default_entity_manager'
+      - '@index.external.internal_hose'
+      - '@index.articles'
+      - '@index.sources'
+      - '@service_container'
+      - '@monolog.logger.queue_command'
+    tags:
+      - { name: console.command }
+
+  app.command.sync_site_config:
+    class: 'AppBundle\Command\SyncSiteConfigCommand'
+    arguments:
+      - '@app.configuration'
+    tags:
+      - { name: console.command }
+
+  app.command.update_stored_queries:
+    class: 'AppBundle\Command\UpdateStoredQueriesCommand'
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@queue.producer.documents_fetch'
+    tags:
+      - { name: console.command }

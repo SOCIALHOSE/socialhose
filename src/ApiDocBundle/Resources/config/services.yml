@@ -1,0 +1,53 @@
+services:
+    #
+    # Nelmio Api Doc parser for entity which implements NormalizableEntityInterface.
+    #
+    api_doc.parser.entity:
+        class: 'ApiDocBundle\Parser\EntityMetadataParser'
+        arguments: [ "@=service('doctrine.orm.default_entity_manager').getMetadataFactory()" ]
+        tags:
+            - { name: nelmio_api_doc.extractor.parser }
+
+    #
+    # Allow use custom response.
+    #
+    api_doc.parser.custom:
+        class: 'ApiDocBundle\Parser\CustomOutputParser'
+        arguments:
+            - '@api_doc.parser.entity'
+            - '@api_doc.parser.pagination'
+        tags:
+            - { name: nelmio_api_doc.extractor.parser }
+
+    #
+    # Pagination response parser.
+    #
+    api_doc.parser.pagination:
+        class: 'ApiDocBundle\Parser\PaginationParser'
+        arguments: [ '@api_doc.parser.entity' ]
+        tags:
+            - { name: nelmio_api_doc.extractor.parser }
+
+    #
+    # Array response parser.
+    #
+    api_doc.parser.array:
+        class: 'ApiDocBundle\Parser\ArrayParser'
+        arguments: [ '@api_doc.parser.entity' ]
+        tags:
+            - { name: nelmio_api_doc.extractor.parser }
+
+    #
+    # Roles extractor.
+    #
+    api_doc.extractor_handler.roles:
+        class: 'ApiDocBundle\Extractor\Handler\RolesHandler'
+        tags:
+            - { name: nelmio_api_doc.extractor.handler }
+
+    #
+    # Override default Nelmio Api Doc Bundle HtmlFormatter.
+    #
+    api_doc.formatter.html:
+        class: 'ApiDocBundle\Formatter\AppHtmlFormatter'
+        parent: nelmio_api_doc.formatter.html_formatter

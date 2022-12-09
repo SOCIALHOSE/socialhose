@@ -1,0 +1,60 @@
+{#
+    Content document element.
+#}
+
+{%- set isEnhanced = themeType == 'enhanced' -%}
+{%- set showImage = isEnhanced and showImages and (document.image is not empty) -%}
+
+<div class="document">
+    {%- if isEnhanced -%}
+        <div class="document-aside">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAALAQMAAAB8oI5bAAAABlBMVEX///9ucHPxuGwkAAAAAXRSTlMAQObYZgAAABpJREFUCNdj+HyAoceBYZ4DiGwAo/1I5P8DALPlCueka/iaAAAAAElFTkSuQmCC">
+        </div>
+    {%- endif -%}
+    <div class="document-main">
+        <div class="document-body">
+            <div class="document-headline">
+                <a href="{{- document.permalink -}}">
+                    {{- document.title -}}
+                </a>
+            </div>
+            <div class="document-info">
+                <span class="document-source">
+                    {{- document.source.title -}}&nbsp;
+                    {%- if showSourceCountry and document.source is not empty and document.source.country is not empty -%}
+                        ({{ document.source.country }})&nbsp;
+                    {%- endif -%}
+                </span>
+                {%- if document.author is not empty and document.author.name is not empty -%}
+                    <span class="document-author">
+                        {%- if not isEnhanced -%}
+                            &nbsp;-&nbsp;
+                        {%- endif -%}
+                        {{- document.author.name -}}
+                    </span>
+                {%- endif -%}
+                <span class="document-date">
+                    {%- if isEnhanced -%}
+                        &nbsp;|&nbsp;
+                    {%- else -%}
+                        &nbsp;-&nbsp;
+                    {%- endif -%}
+                    {{- document.published|date('F d, Y H:i') -}}
+                </span>
+            </div>
+            <div class="document-content">
+                {{- document.content -}}
+            </div>
+            {%- include _root ~ '/Partial/Content/comments.html.twig' with {
+                comments: document.comments,
+                showUserComments: showUserComments,
+                themeType: themeType
+            } -%}
+        </div>
+        {%- if showImage -%}
+            <div class="document-image">
+                <img src="{{- document.image -}}">
+            </div>
+        {%- endif -%}
+    </div>
+</div>

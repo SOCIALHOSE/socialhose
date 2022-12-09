@@ -1,0 +1,179 @@
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.cursor-move {
+  cursor: move;
+}
+
+.mask-line {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 20px,
+    black 90%,
+    transparent
+  );
+}
+
+[dir="rtl"] .mask-line {
+  mask-image: linear-gradient(
+    to left,
+    transparent,
+    black 20px,
+    black 90%,
+    transparent
+  );
+}
+
+.app-sidebar__inner {
+  .search-wrapper {
+    &.active {
+      width: 200px;
+
+      .input-holder {
+        width: 100%;
+      }
+
+      .close {
+        left: 210px;
+      }
+    }
+  }
+}
+
+.white-space {
+  &-nowrap {
+    white-space: nowrap;
+  }
+}
+
+.b-radius {
+  &-5 {
+    border-radius: 5px;
+  }
+}
+
+.radio-options {
+  .form-group {
+    > label {
+      width: 150px;
+    }
+  }
+}
+
+.Select {
+  &.is-disabled {
+    .Select-value-label {
+      color: $gray-500 !important;
+    }
+  }
+}
+
+.btn-anchor {
+  padding: 0;
+  font-size: 0.875rem;
+}
+
+// reactstrap invalid icon
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
+  background-image: none;
+}
+
+// loading
+.loading {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: placeload;
+  animation-name: placeload;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  background: #f6f7f8;
+  background: #eae4e4;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(8%, #eae4e4),
+    color-stop(18%, #dddddd),
+    color-stop(33%, #eae4e4)
+  );
+  background: -webkit-linear-gradient(
+    left,
+    #eae4e4 8%,
+    #dddddd 18%,
+    #eae4e4 33%
+  );
+  background: linear-gradient(to right, #eae4e4 8%, #dddddd 18%, #eae4e4 33%);
+  -webkit-background-size: 800px 104px;
+  background-size: 1200px 104px;
+  position: relative;
+  border-radius: 5px;
+}
+
+@-webkit-keyframes placeload {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+@keyframes placeload {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+// loading: end
+
+.zoom-modal {
+  &.fade .modal-dialog {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0, 1.5);
+    transform: scale(0.8);
+  }
+
+  &.show .modal-dialog {
+    transform: scale(1);
+  }
+}
+
+.mask {
+  // reactour (web guide)
+  color: $gray-700;
+  opacity: 0.6;
+}
+
+.floating-icon {
+  position: fixed;
+  border-radius: 50px;
+  bottom: 20px;
+  left: 20px;
+  padding: 0;
+  height: 54px;
+  line-height: 54px;
+  width: 54px;
+  box-shadow: $box-shadow-default;
+  z-index: 155;
+
+  svg {
+    top: 50%;
+    left: 55%;
+    position: absolute;
+    margin: -0.5em 0 0 -0.5em;
+  }
+}
+
+.hover-link:hover,
+.hover-link:focus {
+  text-decoration: underline !important;
+}

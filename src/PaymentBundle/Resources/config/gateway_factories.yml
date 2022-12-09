@@ -1,0 +1,10 @@
+#
+# Payment gateway factory
+#
+services:
+  payment.gateway_factory.static:
+    class: 'PaymentBundle\Gateway\Factory\StaticPaymentGatewayFactory'
+    arguments:
+      - '@payment.gateway.paypal'
+
+  payment.gateway_factory: '@payment.gateway_factory.static'

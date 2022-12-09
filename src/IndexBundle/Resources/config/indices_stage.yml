@@ -1,0 +1,5 @@
+#
+# Define used indices for staging environment
+#
+imports:
+  - { resource: 'indices_prod.yml' }

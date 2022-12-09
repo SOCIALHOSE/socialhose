@@ -1,0 +1,133 @@
+.navigation-ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+  overflow: auto;
+  // white-space: nowrap;
+  @include border-radius($border-radius);
+
+  .navigation-link {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+    font-size: $font-size-lg / 1.1;
+    padding: ($layout-spacer-x / 1.5) 0;
+    color: $gray-500;
+    position: relative;
+
+    em {
+      font-style: normal;
+      font-size: $h4-font-size;
+      background: $primary;
+      color: $white;
+      text-align: center;
+      padding: 0;
+      width: 40px;
+      min-width: 40px;
+      height: 40px;
+      line-height: 40px;
+      @include border-radius(50px);
+      display: block;
+      margin: 0 auto 0.5rem;
+      position: relative;
+      z-index: 7;
+      transition: all 0.2s;
+    }
+
+    &.active {
+      color: $gray-700;
+      em {
+        background: $primary;
+      }
+    }
+
+    &:hover {
+      color: $gray-600;
+    }
+  }
+}
+
+// vertical navigation menu
+.navigation-vertical {
+  // max-width: 300px;
+
+  .navigation-ul {
+    .navigation-link {
+      text-align: start;
+      display: flex;
+      align-items: center;
+      align-content: flex-start;
+      padding: ($layout-spacer-x / 2);
+      margin-bottom: ($layout-spacer-x / 3);
+      @include border-radius($border-radius-lg);
+      transition: all 0.2s;
+      font-size: 1rem;
+      font-weight: bold;
+      color: $gray-600;
+
+      &::before,
+      &::after {
+        display: none;
+      }
+
+      em {
+        margin: 0;
+        margin-inline-end: ($layout-spacer-x / 2);
+      }
+
+      &:hover {
+        background: $gray-200;
+      }
+
+      &.active {
+        background: $primary;
+        color: $white;
+
+        em {
+          background: rgba(255, 255, 255, 0.4);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 360px) and (max-width: 991px) {
+  .navigation-vertical {
+    max-width: unset;
+
+    .navigation-ul {
+      display: flex;
+
+      .navigation-link {
+        text-align: start;
+        display: block;
+        padding: ($layout-spacer-x / 2);
+        margin-bottom: 0;
+        @include border-radius($border-radius-lg);
+        transition: all 0.2s;
+
+        &::before,
+        &::after {
+          display: none;
+        }
+
+        em {
+          display: none;
+        }
+
+        &:hover {
+          background: $gray-200;
+        }
+
+        &.active {
+          background: $primary;
+          color: $white;
+        }
+      }
+    }
+  }
+}

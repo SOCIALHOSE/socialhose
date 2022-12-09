@@ -1,0 +1,35 @@
+services:
+  cache.form_type.current_user_category:
+    class: 'CacheBundle\Form\Type\CurrentUserOwnedEntityType'
+    arguments:
+      - '@doctrine'
+      - '@security.token_storage'
+    tags:
+      - { name: form.type }
+
+  cache.form.source_list_creation:
+    class: 'CacheBundle\Form\Sources\SourceListType'
+    tags:
+      - { name: form.type }
+
+  app.form_factory.filter_factory_aware.source:
+    class: 'AppBundle\Form\Factory\FilterFactoryAwareTypeFactory'
+    arguments:
+      - '@index.sources'
+      - '%search.page_size%'
+    public: false
+
+  cache.form.soure_index.search:
+    class: 'CacheBundle\Form\Sources\SourceSearchType'
+    factory: [ '@app.form_factory.filter_factory_aware.source', 'create' ]
+    arguments: [ 'CacheBundle\Form\Sources\SourceSearchType' ]
+    tags:
+      - { name: form.type }
+
+  app.form.analytic:
+    class: 'CacheBundle\Form\AnalyticType'
+    arguments:
+      - '@index.articles'
+      - '@security.token_storage'
+    tags:
+      - { name: form.type }

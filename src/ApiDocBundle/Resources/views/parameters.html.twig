@@ -1,0 +1,56 @@
+{#
+    Draw documentation input parameters and result.
+#}
+
+{% import _self as self %}
+
+{%- spaceless -%}
+<table style="width: 100%">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+        {{- self.renderRow(parameters) -}}
+    </tbody>
+</table>
+{%- endspaceless -%}
+
+{%- macro renderRow(parameters, level = 0) -%}
+    {% import _self as self %}
+
+    {%- for name, options in parameters -%}
+        <tr>
+            <td>
+                {%- if level > 0 -%}
+                    {%- for i in range(0, level - 1) -%}
+                        &nbsp;&nbsp;&nbsp;
+                    {%- endfor -%}
+                    <i style="color: gray; font-size: 0.8em">&#8627;</i>
+                {%- endif -%}
+                {{- name -}}
+            </td>
+            <td>
+                {{- options.dataType -}}
+            </td>
+            <td>
+                {{- options.description -}}
+                {%- if (options.choices is defined) and (options.choices is iterable) and (options.choices|length > 0) -%}
+                    <br>
+                    <b>Available choices:</b>
+                    <ul>
+                        {%- for value in options.choices -%}
+                            <li>{{- value -}}</li>
+                        {%- endfor -%}
+                    </ul>
+                {%- endif -%}
+            </td>
+        </tr>
+        {%- if options.children is defined -%}
+            {{- self.renderRow(options.children, level + 1) -}}
+        {%- endif -%}
+    {%- endfor -%}
+{%- endmacro -%}

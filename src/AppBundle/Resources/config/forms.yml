@@ -1,0 +1,42 @@
+services:
+    app.form_factory.filter_factory_aware.external:
+        class: 'AppBundle\Form\Factory\FilterFactoryAwareTypeFactory'
+        arguments:
+            - '@index.external'
+            - '%search.page_size%'
+        public: false
+
+    app.form_factory.filter_factory_aware.internal:
+        class: 'AppBundle\Form\Factory\FilterFactoryAwareTypeFactory'
+        arguments:
+            - '@index.articles'
+            - '%search.page_size%'
+        public: false
+
+    app.form.simple_query:
+        class: 'AppBundle\Form\SearchRequest\SimpleQuerySearchRequestType'
+        factory: [ '@app.form_factory.filter_factory_aware.external', 'create' ]
+        arguments: [ 'AppBundle\Form\SearchRequest\SimpleQuerySearchRequestType' ]
+        tags:
+            - { name: form.type }
+
+    app.form.stored_query:
+        class: 'AppBundle\Form\SearchRequest\StoredQuerySearchRequestType'
+        factory: [ '@app.form_factory.filter_factory_aware.internal', 'create' ]
+        arguments: [ 'AppBundle\Form\SearchRequest\StoredQuerySearchRequestType' ]
+        tags:
+            - { name: form.type }
+
+    app.form.clip_feed:
+        class: 'AppBundle\Form\SearchRequest\ClipFeedSearchRequestType'
+        factory: [ '@app.form_factory.filter_factory_aware.internal', 'create' ]
+        arguments: [ 'AppBundle\Form\SearchRequest\ClipFeedSearchRequestType' ]
+        tags:
+            - { name: form.type }
+
+    app.form.feed_document_search:
+        class: 'AppBundle\Form\FeedDocumentSearchType'
+        factory: [ '@app.form_factory.filter_factory_aware.internal', 'create' ]
+        arguments: [ 'AppBundle\Form\FeedDocumentSearchType' ]
+        tags:
+            - { name: form.type }

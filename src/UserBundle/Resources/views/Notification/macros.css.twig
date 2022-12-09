@@ -1,0 +1,17 @@
+{%- macro renderFont(font) -%}
+font-family: {{- font.family|raw -}};
+font-size: {{- font.size -}}px;
+
+{%- if (font.style.bold) -%}
+    font-weight: bold;
+{%- endif -%}
+
+{%- if (font.style.italic) -%}
+    font-style: italic;
+{%- endif -%}
+
+{%- if (font.style.underline) -%}
+    text-decoration: underline;
+{%- endif -%}
+
+{%- endmacro -%}

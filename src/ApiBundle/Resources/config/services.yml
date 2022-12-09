@@ -1,0 +1,62 @@
+imports:
+  - { resource: controllers.yml }
+  - { resource: inspector.yml }
+  - { resource: normalizers.yml }
+
+services:
+  #
+  # Subscriber for api events.
+  #
+  api.listeners.api:
+    class: 'ApiBundle\EventListener\ApiSubscriber'
+    arguments:
+      - '@serializer'
+      - '@monolog.logger.api_error'
+    tags:
+      - { name: kernel.event_subscriber }
+
+  #
+  # App annotation fetch listener.
+  #
+  api.listeners.annotation:
+    class: 'ApiBundle\EventListener\AnnotationFetchListener'
+    arguments:
+      - '@annotation_reader'
+    tags:
+      -
+        name: kernel.event_listener
+        event: kernel.controller
+        method: handle
+
+
+  #
+  # Roles annotation checker listener.
+  #
+  api.listeners.security:
+    class: 'ApiBundle\EventListener\RolesListener'
+    arguments:
+      - '@security.token_storage'
+      - '@security.role_hierarchy'
+    tags:
+      -
+        name: kernel.event_listener
+        event: kernel.controller
+        method: handle
+        priority: -10
+
+  #
+  # Formatter for api errors log.
+  #
+  api.log_formatter.api_errors:
+    class: Monolog\Formatter\LineFormatter
+    arguments:
+      - "[%%datetime%%] %%message%%\n%%context.headers%%\n%%context.request%%\n\n"
+      - ~
+      - true
+
+  api.form.subscribe_to_notifications:
+    class: 'ApiBundle\Form\SubscribeToNotificationsBatchType'
+    arguments:
+      - '@security.token_storage'
+    tags:
+      - { name: form.type }

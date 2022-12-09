@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="socialhose" default="build">
+
+    <property environment="env"/>
+
+    <target name="build"
+            depends="prepare,lint,phpcs-ci"/>
+
+    <target name="clean" description="Cleanup build artifacts">
+        <delete dir="${env.WORKSPACE}/.build/logs"/>
+        <delete dir="${env.WORKSPACE}/.build/reports"/>
+    </target>
+
+    <target name="prepare" depends="clean" description="Prepare for build">
+        <mkdir dir="${env.WORKSPACE}/.build/logs"/>
+        <mkdir dir="${env.WORKSPACE}/.build/reports"/>
+    </target>
+
+    <target name="lint" description="Perform syntax check of sourcecode files">
+        <apply executable="php" failonerror="true" verbose="false">
+            <arg value="-l" />
+
+            <fileset dir="${env.WORKSPACE}/">
+                <include name="**/*.php" />
+                <exclude name="**/vendor/**"/>
+                <exclude name="**/cache/**"/>
+                <modified />
+            </fileset>
+
+        </apply>
+    </target>
+
+    <target name="phpcs-ci" description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server">
+        <exec executable="phpcs">
+            <arg value="--report=checkstyle" />
+            <arg value="--report-file=${env.WORKSPACE}/.build/logs/checkstyle.xml" />
+            <arg value="--standard=Symfony2" />
+            <arg path="${env.WORKSPACE}/src" />
+        </exec>
+    </target>
+
+    <target name="phpmd-ci" description="Perform project mess detection using PHPMD creating a log file for the continuous integration server">
+        <exec executable="phpmd">
+            <arg path="${env.WORKSPACE}/src" />
+            <arg value="xml" />
+            <arg value="sibers_pmd" />
+            <arg value="--reportfile" />
+            <arg value="${env.WORKSPACE}/.build/logs/pmd.xml" />
+            <arg value="--exclude=/cache/,/logs/,/vendor/,/test/" />
+        </exec>
+    </target>
+
+    <target name="phploc" description="Measure project size using PHPLOC">
+        <exec executable="phploc">
+            <arg value="--exclude=cache,logs,vendor,test" />
+            <arg value="--log-csv" />
+            <arg value="${env.WORKSPACE}/.build/logs/phploc.csv" />
+            <arg path="${env.WORKSPACE}/src" />
+        </exec>
+    </target>
+
+</project>

@@ -1,0 +1,29 @@
+services:
+  app.simple_query_manager:
+    class: 'AppBundle\Manager\SimpleQuery\SimpleQueryManager'
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '%cache.query_lifetime%'
+
+  app.stored_query_manager:
+    class: 'AppBundle\Manager\StoredQuery\StoredQueryManager'
+    arguments:
+      - '@index.external'
+      - '@index.articles'
+      - '@doctrine.orm.default_entity_manager'
+      - '%search.page_size%'
+
+  app.source_manager:
+    class: 'AppBundle\Manager\Source\SourceManager'
+    arguments:
+      - '@index.sources'
+      - '@index.external'
+      - '@doctrine.orm.default_entity_manager'
+      - '@monolog.logger.queue_command'
+      - '%kernel.root_dir%/../var'
+
+  app.feed_manager:
+    class: 'AppBundle\Manager\Feed\FeedManager'
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@index.articles'

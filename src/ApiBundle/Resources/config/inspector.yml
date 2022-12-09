@@ -1,0 +1,18 @@
+services:
+    #
+    # Inspectors factory.
+    #
+    api.inspector_factory:
+        class: 'ApiBundle\Security\Inspector\Factory\LazyInspectorFactory'
+        arguments:
+            - '@service_container'
+            - # injected by compiler pass.
+
+    #
+    # Access checker.
+    #
+    api.access_checker:
+        class: 'ApiBundle\Security\AccessChecker\AccessChecker'
+        arguments:
+            - '@security.token_storage'
+            - '@api.inspector_factory'

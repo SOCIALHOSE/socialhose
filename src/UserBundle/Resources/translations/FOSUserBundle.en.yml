@@ -1,0 +1,16 @@
+
+
+registration:
+    email:
+        message: |
+            Hi %username%!
+
+            You have recently registered for an account with SOCIALHOSE.IO under this email address. 
+            Please verify your account by clicking here:
+            %confirmationUrl%
+
+            This link can only be used once to validate this account.
+
+            Regards,
+            SOCIALHOSE.IO  Team.
+

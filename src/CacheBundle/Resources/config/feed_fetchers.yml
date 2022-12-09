@@ -1,0 +1,32 @@
+services:
+    #
+    # Fetcher factories.
+    #
+    cache.feed_fetcher_factory.lazy:
+        class: 'CacheBundle\Feed\Fetcher\Factory\LazyFeedFetcherFactory'
+        arguments:
+            - '@service_container'
+            - # Injected by compiler phase
+
+    cache.feed_fetcher_factory: '@cache.feed_fetcher_factory.lazy'
+
+    #
+    # Fetchers.
+    #
+    cache.feed_fetcher.query:
+        class: 'CacheBundle\Feed\Fetcher\QueryFeedFetcher'
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@app.stored_query_manager'
+            - '@app.source_manager'
+        tags:
+            - { name: socialhose.feed_fetcher }
+
+    cache.feed_fetcher.clip:
+        class: 'CacheBundle\Feed\Fetcher\ClipFeedFetcher'
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@index.articles'
+        tags:
+            - { name: socialhose.feed_fetcher }
+

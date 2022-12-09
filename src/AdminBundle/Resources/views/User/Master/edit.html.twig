@@ -1,0 +1,10 @@
+{% extends 'AdminBundle:User/Layout:edit_layout.html.twig' %}
+
+{% block edit_title %}
+    Master User edit
+{% endblock edit_title %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('/bundles/admin/js/master_crud.js') }}"></script>
+{% endblock javascripts %}

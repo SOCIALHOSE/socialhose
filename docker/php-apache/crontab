@@ -1,0 +1,6 @@
+CMD=/bin/console --env=stage
+
+* * * * * {{CWD}} socialhose:notification:start  2>&1 > /dev/null
+0 0 * * * {{CWD}} socialhose:renew-search-limits 2>&1 > /dev/null
+*/30 * * * * {{CWD}} socialhose:stored-query:update 2>&1 > /dev/null
+* */3 * * * {{CWD}} socialhose:query:remove_old 2>&1 > /dev/null

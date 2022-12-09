@@ -1,0 +1,44 @@
+default:
+    #
+    # Auto load contexts
+    #
+    autoload:
+        '': %paths.base%/behat/
+    suites:
+
+        #
+        # Suite for commands.
+        #
+        command:
+            contexts:
+                - Command\Context\CommandContext:
+                    - '@service_container'
+                    - '%paths.base%/src/AppBundle/DataFixtures/'
+
+            #
+            # Paths to command features.
+            #
+            paths:
+                - %paths.base%/behat/Command/features/
+
+        #
+        # Suite for first version of api.
+        #
+        api:
+            contexts:
+                - Api\Context\ApiContext:
+                    - '@service_container'
+                    - 'http://socialhose.local/'
+                    - '%paths.base%/src/AppBundle/DataFixtures/'
+
+            #
+            # Paths to show features for api v1 tests.
+            #
+            paths:
+                - %paths.base%/behat/Api/features/Security/
+                - %paths.base%/behat/Api/features/V1/
+    extensions:
+        Behat\Symfony2Extension:
+            kernel:
+                env: test
+                debug: true

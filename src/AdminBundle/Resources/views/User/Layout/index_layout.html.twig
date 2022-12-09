@@ -1,0 +1,92 @@
+{% extends 'AdminBundle::layout-inner.html.twig' %}
+
+{% block inner_content %}
+    <h1>
+        {%- block index_title -%}
+        {%- endblock index_title -%}
+    </h1>
+
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-xs-3 col-xs-offset-9">
+            {{ form_start(search) }}
+            <div class="input-group">
+                <input
+                        type="text"
+                        name="{{ search.query.vars.full_name }}"
+                        class="form-control"
+                        value="{{ search.query.vars.value }}"
+                />
+                <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">Go!</button>
+                    </span>
+            </div><!-- /input-group -->
+            {{ form_end(search, {'render_rest': false}) }}
+        </div>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>{{ knp_pagination_sortable(users, 'Email', 'User.email') }}</th>
+            <th>{{ knp_pagination_sortable(users, 'First Name', 'User.firstName') }}</th>
+            <th>{{ knp_pagination_sortable(users, 'Last Name', 'User.lastName') }}</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.email }}</td>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>
+                    {%- block index_row_buttons -%}
+                        <a class="btn btn-info btn-block" href="{{ path(showRoute, { 'id': user.id }) }}">Show</a>
+                        <a class="btn btn-warning btn-block" href="{{ path(editRoute, { 'id': user.id }) }}">Edit</a>
+                        <button data-href="{{ path(deleteRoute, {'id': user.id}) }}" class="btn btn-danger btn-block btn-delete">
+                            Delete
+                        </button>
+                        <button data-href="{{ path(changeEnabledRoute, {'id': user.id}) }}" class="btn
+                         btn-block
+                         {% if user.isEnabled %}
+                                btn-success
+                            {% else %}
+                                btn-default
+                            {% endif %}
+                         user-change-status">
+                                <span class="user-enabled"
+                                        {% if not user.isEnabled %}
+                                            style="display: none"
+                                        {% endif %}
+                                >Block</span>
+                            <span class="user-disabled"
+                                    {% if user.isEnabled %}
+                                        style="display: none"
+                                    {% endif %}
+                            >Unblock</span>
+                        </button>
+                    {%- endblock index_row_buttons -%}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(users) }}
+    </div>
+
+    {%- block inner_footer -%}
+        <ul>
+            <li>
+                <a href="{{ newUrl }}">Create a new user</a>
+            </li>
+        </ul>
+    {%- endblock inner_footer -%}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{- parent() -}}
+    <script src="{{ asset('/bundles/admin/js/common_crud.js') }}"></script>
+    <script src="{{ asset('/bundles/admin/js/user_crud.js') }}"></script>
+{% endblock javascripts %}

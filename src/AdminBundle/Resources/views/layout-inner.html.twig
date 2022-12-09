@@ -1,0 +1,66 @@
+{% extends "AdminBundle::layout.html.twig" %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-2">
+            <div>
+                <a href="{{ path('admin_dashboard') }}" class="list-group-item">
+                    Dashboard
+                </a>
+                <hr>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <a href="{{ path('admin_configuration_index') }}" class="list-group-item">
+                        Configuration
+                    </a>
+                    <hr>
+                    <a href="{{ path('admin_plan_index') }}" class="list-group-item">
+                        Billing plans
+                    </a>
+                    <a href="{{ path('admin_payment_index') }}" class="list-group-item">
+                        Payments
+                    </a>
+                    <hr>
+                    <a href="{{ path('admin_user_superadmin_edit') }}" class="list-group-item">
+                        Super admin edit
+                    </a>
+                    <a href="{{ path('admin_user_admin_index') }}" class="list-group-item">
+                        Admins
+                    </a>
+                    <hr>
+                {% endif %}
+                <a href="{{ path('admin_organization_index') }}" class="list-group-item">
+                    Organizations
+                </a>
+                <hr>
+                <a href="{{ path('admin_userverification_index') }}" class="list-group-item">
+                    Not verified users
+                </a>
+                <a href="{{ path('admin_user_master_index') }}" class="list-group-item">
+                    Master Users
+                </a>
+                <a href="{{ path('admin_user_subscriber_index') }}" class="list-group-item">
+                    Subscribers
+                </a>
+            </div>
+        </div>
+        <div class="col-xs-10">
+            {%- for message in app.session.flashBag.get('admin_success') -%}
+                <div class="alert alert-success">
+                    {{- message -}}
+                </div>
+            {%- endfor -%}
+
+
+            {%- for message in app.session.flashBag.get('admin_error') -%}
+                <div class="alert alert-error">
+                    {{- message -}}
+                </div>
+            {%- endfor -%}
+
+            {%- block inner_content -%}
+            {%- endblock -%}
+        </div>
+    </div>
+
+{% endblock %}

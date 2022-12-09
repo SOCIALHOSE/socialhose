@@ -1,0 +1,19 @@
+services:
+  admin.forms.parameters:
+    class: 'AdminBundle\Form\ConfigParametersType'
+    arguments:
+      - '@app.configuration_definitions'
+    tags:
+      - { name: form.type }
+
+  admin.forms.hidden_entity_type:
+    class: 'AdminBundle\Form\Type\HiddenEntityType'
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+    tags:
+      - { name: form.type }
+
+  admin.twig_extension:
+    class: 'AdminBundle\Twig\AdminTwigExtension'
+    tags:
+      - { name: twig.extension }

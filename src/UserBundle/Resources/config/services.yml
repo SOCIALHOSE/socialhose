@@ -1,0 +1,105 @@
+imports:
+  - { resource: controllers.yml }
+  - { resource: forms.yml }
+  - { resource: repositories.yml }
+
+services:
+  user.command.renew_search_limits:
+    class: 'UserBundle\Command\RenewSearchLimitsCommand'
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@monolog.logger.queue_command'
+    tags:
+      - { name: console.command }
+
+  user.command.cancel_subscription:
+    class: 'UserBundle\Command\CancelSubscriptionCommand'
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@monolog.logger.queue_command'
+    tags:
+      - { name: console.command }    
+  
+  user.command.downgrade_subscription_plan:
+    class: 'UserBundle\Command\DowngradeSubscriptionPlanCommand'
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@monolog.logger.queue_command'
+      - '@service_container'
+    tags:
+      - { name: console.command }    
+
+  user.mailer.default:
+    class: 'UserBundle\Mailer\Mailer'
+    arguments:
+      - '@mailer'
+      - '@swiftmailer.transport.real'
+      - '@twig'
+      - '@app.configuration'
+      - '@router'
+    lazy: true
+
+  user.mailer:
+    class: 'UserBundle\Mailer\LoggableMailer'
+    arguments:
+      - '@user.mailer.default'
+      - '@monolog.logger.mailer'
+
+  user.role_checker:
+    class: 'UserBundle\Utils\RoleChecker\RoleChecker'
+    arguments:
+      - '@security.role_hierarchy'
+      - '%security.role_hierarchy.roles%'
+
+  user.notification_manager:
+    class: 'UserBundle\Manager\Notification\NotificationManager'
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@cache.feed_fetcher_factory'
+      - '@app.configuration'
+      - '@cache.document_content_extractor'
+
+  user.user_manager:
+    class: 'UserBundle\Manager\User\UserManager'
+    arguments:
+      - '@fos_user.util.password_updater'
+      - '@fos_user.util.canonical_fields_updater'
+      - '@fos_user.object_manager'
+      - '%fos_user.model.user.class%'
+
+  user.twig_extension.htmlcompress:
+    class: 'nochso\HtmlCompressTwig\Extension'
+    tags:
+      - { name: twig.extension }
+
+  user.twig_extension:
+    class: 'UserBundle\Twig\TwigExtension'
+    tags:
+      - { name: twig.extension }
+
+  user.inspector.notification:
+    class: 'UserBundle\Security\Inspector\NotificationInspector'
+    tags:
+      - { name: socialhose.inspector }
+
+  user.inspector.group_recipient:
+    class: 'UserBundle\Security\Inspector\GroupRecipientInspector'
+    tags:
+      - { name: socialhose.inspector }
+
+  user.inspector.person_recipient:
+    class: 'UserBundle\Security\Inspector\PersonRecipientInspector'
+    tags:
+      - { name: socialhose.inspector }
+
+  stripe.service:
+      class: 'UserBundle\Services\StripeService'
+      arguments:
+          $stripe_auth_api_secret_key: '%stripe_secret_key%'
+          $stripe_auth_api_publish_key: '%stripe_publish_key%'    
+      lazy: true  
+
+  cost.calculation:
+      class: UserBundle\Controller\Security\CostCalculationController
+      arguments:
+        - '@service_container'

@@ -1,0 +1,8 @@
+[program:notification_sending]
+directory={{CWD}}
+command={{CWD}}/bin/console --env=stage rabbitmq:consumer notifications_send
+environment=
+user=socialhose
+autostart=true
+autorestart=true
+redirect_stderr=True

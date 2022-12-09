@@ -1,0 +1,7 @@
+#
+# Define used indices for testing environment
+#
+services:
+  index.external: '@index.external.internal_hose'
+  index.articles: '@index.articles.elasticsearch'
+  index.sources: '@index.sources.elasticsearch'

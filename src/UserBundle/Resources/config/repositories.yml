@@ -1,0 +1,6 @@
+services:
+  user.repository.plan:
+    class: 'UserBundle\Repository\PlanRepository'
+    factory: [ '@doctrine.orm.default_entity_manager', 'getRepository' ]
+    arguments:
+      - 'UserBundle\Entity\Plan'

@@ -1,0 +1,46 @@
+{% extends 'AdminBundle::layout-inner.html.twig' %}
+
+{% block inner_content %}
+    <h1>
+        Verify user {{ user.fullName }}
+    </h1>
+
+    <h3>
+        User information
+    </h3>
+    <div>
+        <div><b>Full name:</b> {{ user.fullName }}</div>
+        <div><b>Email:</b> {{ user.email }}</div>
+        <div><b>Phone:</b> {{ user.phoneNumber }}</div>
+    </div>
+
+    <h3>
+        Billing information
+    </h3>
+    <div>
+        <div><b>Subscription type:</b> {{ subscription.subscriptionType.value }}</div>
+        <div><b>Plan:</b> {{ plan.name }}</div>
+    </div>
+
+    {%- if organization is not null -%}
+        <h3>
+            Organization information
+        </h3>
+
+        <div>
+            <div><b>Name: </b> {{ organization.name }}</div>
+            <div><b>Address: </b> {{ subscription.organizationAddress }}</div>
+            <div><b>Email: </b> {{ subscription.organizationEmail }}</div>
+            <div><b>Phone: </b> {{ subscription.organizationPhone }}</div>
+        </div>
+    {%- endif -%}
+
+    <hr>
+
+    <form action="{{ path('admin_userverification_show', { 'id': user.id }) }}" method="post">
+        <div>
+            <button name="verify" type="submit" class="btn btn-success">Verify</button>
+            <button name="reject" type="submit" class="btn btn-danger">Reject</button>
+        </div>
+    </form>
+{% endblock inner_content %}

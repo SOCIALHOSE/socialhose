@@ -1,0 +1,24 @@
+{% extends 'AdminBundle:User/Layout:show_layout.html.twig' %}
+
+{% block show_title %}
+     Administrator
+{% endblock show_title %}
+
+{% block show_content %}
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ user.id }}</td>
+        </tr>
+        <tr>
+            <th>Firstname</th>
+            <td>{{ user.firstName }}</td>
+        </tr>
+        <tr>
+            <th>Lastname</th>
+            <td>{{ user.lastName }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock show_content %}

@@ -1,0 +1,49 @@
+imports:
+  - { resource: 'gateway_factories.yml' }
+  - { resource: 'gateways.yml' }
+
+services:
+  #
+  # Commands.
+  #
+  payment.command.billing_plan_sync:
+    class: 'PaymentBundle\Command\BillingPlanSyncCommand'
+    arguments:
+      - '@user.repository.plan'
+      - '@payment.gateway_factory'
+    tags:
+      - { name: console.command }
+
+  payment.command.billing_plan_list:
+    class: 'PaymentBundle\Command\BillingPlanListCommand'
+    arguments:
+      - '@payment.paypal.api_context'
+    tags:
+      - { name: console.command }
+
+  payment.command.billing_plan_create:
+    class: 'PaymentBundle\Command\BillingPlanCreateCommand'
+    arguments:
+      - '@payment.paypal.api_context'
+    tags:
+      - { name: console.command }
+
+  payment.command.billing_plan_delete:
+    class: 'PaymentBundle\Command\BillingPlanDeleteCommand'
+    arguments:
+      - '@payment.paypal.api_context'
+    tags:
+      - { name: console.command }
+
+
+
+  #
+  # Agreement manager.
+  #
+  payment.agreement_manager.orm:
+    class: 'PaymentBundle\Agreement\ORMAgreementManager'
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+
+  payment.agreement_manager: '@payment.agreement_manager.orm'
+

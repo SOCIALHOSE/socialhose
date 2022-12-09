@@ -1,0 +1,59 @@
+services:
+  user.controller.user:
+    class: 'UserBundle\Controller\V1\UserController'
+    arguments:
+      - '@security.token_storage'
+      - '@form.factory'
+      - '@fos_user.user_manager'
+      - '@service_container'
+
+  user.controller.registration:
+    class: 'UserBundle\Controller\Security\RegistrationController'
+    parent: api.controller.abstract
+
+  user.controller.plan:
+    class: 'UserBundle\Controller\Security\PlanController'
+    parent: api.controller.abstract
+
+  user.controller.cost_calculation:
+    class: 'UserBundle\Controller\Security\CostCalculationController'
+    parent: api.controller.abstract
+
+  user.controller.resetting:
+    class: 'UserBundle\Controller\Security\ResettingController'
+    parent: api.controller.abstract
+
+  user.controller.notification:
+    class: 'UserBundle\Controller\V1\NotificationController'
+    parent: api.controller.abstract_crud
+    arguments:
+      index_1: 'UserBundle\Entity\Notification\Notification'
+
+  user.controller.notification_theme:
+    class: 'UserBundle\Controller\V1\NotificationThemeController'
+    parent: api.controller.abstract
+
+  user.controller.receiver:
+    class: 'UserBundle\Controller\V1\ReceiverController'
+    arguments:
+      - '@security.token_storage'
+      - '@doctrine.orm.default_entity_manager'
+
+  user.controller.person_recipient:
+    class: 'UserBundle\Controller\V1\PersonRecipientController'
+    parent: api.controller.abstract_crud
+    arguments:
+      index_1: 'UserBundle\Entity\Recipient\PersonRecipient'
+
+  user.controller.group_recipient:
+    class: 'UserBundle\Controller\V1\GroupRecipientController'
+    parent: api.controller.abstract_crud
+    arguments:
+      index_1: 'UserBundle\Entity\Recipient\GroupRecipient'
+
+  user.controller.current_subscriber:
+    class: 'UserBundle\Controller\V1\CurrentSubscriberController'
+    parent: api.controller.abstract
+  user.controller.hubspot_registration:
+    class: 'UserBundle\Controller\Security\HubSpotRegistrationController'
+    parent: api.controller.abstract

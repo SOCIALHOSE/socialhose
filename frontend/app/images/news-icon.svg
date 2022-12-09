@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="13.32" height="10.81" viewBox="0 0 13.32 10.81">
+  <title>news-icon</title>
+  <g>
+    <path d="M806.85,883.7V888a8.41,8.41,0,0,1,6.54,3V880.3A9.2,9.2,0,0,1,806.85,883.7Z" transform="translate(-806.85 -880.17)" style="fill: #fff"/>
+    <g>
+      <path d="M817.92,880.17l-1.28,1.12a5.87,5.87,0,0,1,0,8.42l1.2,1.12S823,885.75,817.92,880.17Z" transform="translate(-806.85 -880.17)" style="fill: #fff"/>
+      <path d="M815.82,882.14l-0.91,1.11c-0.45-.41,2.28,2.18,0,4.68l0.91,0.91A4.68,4.68,0,0,0,815.82,882.14Z" transform="translate(-806.85 -880.17)" style="fill: #fff"/>
+    </g>
+  </g>
+</svg>

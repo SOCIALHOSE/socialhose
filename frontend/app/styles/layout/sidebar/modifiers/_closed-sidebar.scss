@@ -1,0 +1,417 @@
+// Closed Sidebar
+
+// Sidebar Menu Hover
+
+.closed-sidebar {
+  .app-sidebar {
+    transition: all .3s ease;
+    width: $app-sidebar-width-collapsed;
+    min-width: $app-sidebar-width-collapsed;
+    flex: 0 0 $app-sidebar-width-collapsed;
+    z-index: 13;
+
+    .app-sidebar__inner {
+
+      .app-sidebar__heading {
+        text-indent: -999em;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 0;
+          width: 100%;
+          height: 1px;
+          background: $dropdown-link-hover-bg;
+          text-indent: 1px;
+        }
+      }
+
+      .metismenu-link {
+        text-indent: -99rem;
+        padding: 0;
+      }
+
+      .metismenu-icon {
+        text-indent: 0;
+        left: 50%;
+        margin-inline-start: -17px;
+      }
+
+      .metismenu-state-icon {
+        visibility: hidden;
+      }
+
+      .metismenu-container {
+        &.visible {
+          padding: 0;
+
+          & > .metismenu-item > .metismenu-link {
+            height: 0;
+          }
+        }
+      }
+    }
+
+    &:hover {
+      flex: 0 0 $app-sidebar-width !important;
+      width: $app-sidebar-width !important;
+
+      .app-sidebar__inner {
+
+        .app-sidebar__heading {
+          text-indent: initial;
+          &::before {
+            display: none;
+          }
+        }
+
+        .metismenu-link {
+          text-indent: initial;
+          padding: 0 $layout-spacer-x 0 45px;
+        }
+
+        .metismenu-icon {
+          text-indent: initial;
+          left: 5px;
+          margin-inline-start: 0;
+        }
+
+        .metismenu-state-icon {
+          visibility: visible;
+        }
+
+        .metismenu-container {
+          &.visible {
+            padding: .5em 0 0 2rem;
+
+            & > .metismenu-item > .metismenu-link {
+              height: 2.3em;
+            }
+          }
+
+          .metismenu-container {
+            .metismenu-link {
+              padding-inline-start: 1em;
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+  &:not(.sidebar-mobile-open) {
+
+    .app-sidebar {
+      .scrollbar-container {
+        position: static;
+        height: auto;
+        overflow: initial !important;
+      }
+
+      &:hover {
+        .scrollbar-container {
+          position: absolute;
+          height: 100%;
+          overflow: hidden !important;
+        }
+      }
+    }
+  }
+
+  &:not(.closed-sidebar-mobile) {
+    .app-header {
+      .app-header__logo {
+        width: 160px;
+
+        .logo-src {
+          background: url(../images/logo/logo-square-small.png)
+            no-repeat;
+          background-size: contain;
+        }
+
+        .header__pane {
+          margin-inline-end: auto;
+        }
+      }
+    }
+
+  }
+
+  &.fixed-sidebar {
+    .app-main__outer {
+      padding-inline-start: $app-sidebar-width-collapsed;
+    }
+  }
+
+  &.fixed-header:not(.fixed-sidebar) {
+    .app-sidebar {
+      .app-header__logo {
+        visibility: hidden;
+      }
+    }
+  }
+
+  &.closed-sidebar-mobile {
+    .app-sidebar,
+    .app-header {
+      .app-header__logo {
+        width: auto;
+        display: flex;
+
+        .header__pane {
+          display: none;
+        }
+      }
+    }
+
+    .app-sidebar {
+      .app-header__logo {
+        display: flex;
+        width: $app-sidebar-width-collapsed;
+        padding: 0 $layout-spacer-x !important;
+
+        .logo-src {
+          display: block !important;
+          margin: 0 auto;
+          width: $logo-width - 76;
+        }
+
+        .header__pane {
+          display: none;
+        }
+      }
+
+      &:hover {
+        .app-header__logo {
+          width: $app-sidebar-width;
+
+          .logo-src {
+            width: $logo-width;
+            margin: 0;
+
+          }
+        }
+      }
+    }
+
+    .app-header {
+      margin-inline-start: 0 !important;
+    }
+  }
+
+  &.fixed-footer {
+    .app-footer__inner {
+      margin-inline-start: 0 !important;
+    }
+  }
+}
+
+// Right to Left language
+
+[dir="rtl"] .closed-sidebar {
+  .app-sidebar {
+    transition: all .3s ease;
+    width: $app-sidebar-width-collapsed;
+    min-width: $app-sidebar-width-collapsed;
+    flex: 0 0 $app-sidebar-width-collapsed;
+    z-index: 13;
+
+    .app-sidebar__inner {
+
+      .app-sidebar__heading {
+        text-indent: -999em;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          right: 0;
+          width: 100%;
+          height: 1px;
+          background: $dropdown-link-hover-bg;
+          text-indent: 1px;
+        }
+      }
+
+      .metismenu-link {
+        text-indent: -99rem;
+        padding: 0;
+      }
+
+      .metismenu-icon {
+        text-indent: 0;
+        right: 50%;
+        margin-right: -17px;
+      }
+
+      .metismenu-state-icon {
+        visibility: hidden;
+      }
+
+      .metismenu-container {
+        &.visible {
+          padding: 0;
+
+          & > .metismenu-item > .metismenu-link {
+            height: 0;
+          }
+        }
+      }
+    }
+
+    &:hover {
+      flex: 0 0 $app-sidebar-width !important;
+      width: $app-sidebar-width !important;
+
+      .app-sidebar__inner {
+
+        .app-sidebar__heading {
+          text-indent: initial;
+          &::before {
+            display: none;
+          }
+        }
+
+        .metismenu-link {
+          text-indent: initial;
+          padding: 0 45px 0 $layout-spacer-x;
+        }
+
+        .metismenu-icon {
+          text-indent: initial;
+          right: 5px;
+          margin-right: 0;
+        }
+
+        .metismenu-state-icon {
+          visibility: visible;
+        }
+
+        .metismenu-container {
+          &.visible {
+            padding: .5em 2rem 0 0;
+
+            & > .metismenu-item > .metismenu-link {
+              height: 2.3em;
+            }
+          }
+
+          .metismenu-container {
+            .metismenu-link {
+              padding-right: 1em;
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+  &:not(.sidebar-mobile-open) {
+
+    .app-sidebar {
+      .scrollbar-container {
+        position: static;
+        height: auto;
+        overflow: initial !important;
+      }
+
+      &:hover {
+        .scrollbar-container {
+          position: absolute;
+          height: 100%;
+          overflow: hidden !important;
+        }
+      }
+    }
+  }
+
+  &:not(.closed-sidebar-mobile) {
+    .app-header {
+      .app-header__logo {
+        width: 160px;
+
+        .logo-src {
+          background: url(../images/logo/logo-square-small.png)
+          no-repeat;
+          background-size: contain;
+        }
+
+        .header__pane {
+          margin-left: auto;
+        }
+      }
+    }
+
+  }
+
+  &.fixed-sidebar {
+    .app-main__outer {
+      padding-right: $app-sidebar-width-collapsed;
+    }
+  }
+
+  &.fixed-header:not(.fixed-sidebar) {
+    .app-sidebar {
+      .app-header__logo {
+        visibility: hidden;
+      }
+    }
+  }
+
+  &.closed-sidebar-mobile {
+    .app-sidebar,
+    .app-header {
+      .app-header__logo {
+        width: auto;
+        display: flex;
+
+        .header__pane {
+          display: none;
+        }
+      }
+    }
+
+    .app-sidebar {
+      .app-header__logo {
+        display: flex;
+        width: $app-sidebar-width-collapsed;
+        padding: 0 $layout-spacer-x !important;
+
+        .logo-src {
+          display: block !important;
+          margin: 0 auto;
+          width: $logo-width - 76;
+        }
+
+        .header__pane {
+          display: none;
+        }
+      }
+
+      &:hover {
+        .app-header__logo {
+          width: $app-sidebar-width;
+
+          .logo-src {
+            width: $logo-width;
+            margin: 0;
+
+          }
+        }
+      }
+    }
+
+    .app-header {
+      margin-right: 0 !important;
+    }
+  }
+
+  &.fixed-footer {
+    .app-footer__inner {
+      margin-right: 0 !important;
+    }
+  }
+}

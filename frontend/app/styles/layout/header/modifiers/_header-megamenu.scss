@@ -1,0 +1,23 @@
+// Header Mega Menu
+
+.header-megamenu {
+  &.nav {
+    & > li > .nav-link {
+      color: $gray-600;
+      padding-inline-start: ($nav-link-padding-x / 1.5);
+      padding-inline-end: ($nav-link-padding-x / 1.5);
+
+      .badge-pill {
+        padding: 5px 7px;
+      }
+
+      &:hover, &.active {
+        color: $gray-800;
+      }
+
+      svg {
+        margin-top: 1px;
+      }
+    }
+  }
+}

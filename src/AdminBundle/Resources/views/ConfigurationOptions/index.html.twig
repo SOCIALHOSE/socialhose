@@ -1,0 +1,42 @@
+{% extends 'AdminBundle::layout-inner.html.twig' %}
+
+{% block inner_content %}
+    <h1>Configuration Settings</h1>
+    {{- form_start(form) -}}
+
+    <div>
+        <ul class="nav nav-tabs" role="tablist">
+            {%- for section in form -%}
+                <li role="presentation" {% if loop.first -%}class="active"{%- endif -%}>
+                    <a href="#section_{{- loop.index0 -}}" aria-controls="home" role="tab" data-toggle="tab">
+                        {{- section.vars.name -}}
+                    </a>
+                </li>
+            {%- endfor -%}
+        </ul>
+
+        <div class="tab-content">
+            {%- for section in form -%}
+                <div role="tabpanel" class="tab-pane {% if loop.first -%}active{%- endif -%}" id="section_{{- loop.index0 -}}">
+                    <table class="table table-bordered">
+                        {%- for parameter in section -%}
+                            <tr>
+                                <td>
+                                    {{- form_label(parameter) -}}
+                                    {{- form_errors(parameter) -}}
+                                </td>
+                                <td>
+                                    {{- form_widget(parameter) -}}
+                                </td>
+                            </tr>
+                        {%- endfor -%}
+                    </table>
+                </div>
+            {%- endfor -%}
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+
+    {{- form_end(form) -}}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "AdminBundle::layout-inner.html.twig" %}
+
+{% block inner_content %}
+    <h1>
+        Edit {{ plan.title }} billing plan
+    </h1>
+    {{- form_start(form) -}}
+    <h3>Payment information</h3>
+    {{- form_widget(form.price) -}}
+
+    <hr>
+    <h3>Restrictions</h3>
+    {{- form_rest(form) -}}
+    <div class="btn-group">
+        <button type="submit" class="btn btn-success">Save</button>
+        <a class="btn btn-default" href="{{- path('admin_plan_index') -}}">Back</a>
+    </div>
+    {{- form_end(form) -}}
+{% endblock %}

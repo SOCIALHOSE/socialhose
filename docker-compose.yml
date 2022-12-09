@@ -1,0 +1,76 @@
+version: '3'
+
+networks:
+  socialhose:
+
+services:
+
+  socialhose-php:
+    build:
+      context: docker/php-apache
+      args:
+        UID: ${UID}
+    container_name: socialhose-php
+    working_dir: /var/www/html
+    networks:
+      - socialhose
+    volumes:
+      - ./:/var/www/html
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html/web
+    ports:
+      - "8081:80"
+
+  socialhose-mysql:
+    image: mysql:5.7
+    container_name: socialhose-mysql
+    networks:
+      - socialhose
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+      - ./docker/mysql/init.sql:/etc/mysql/init.sql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=socialhose
+      - MYSQL_USER=sh-user
+      - MYSQL_PASSWORD=root
+    command: --init-file /etc/mysql/init.sql
+    ports:
+      - 33066:3306
+
+  socialhose-rabbit:
+    build: docker/rabbit
+    container_name: socialhose-rabbit
+    working_dir: /var/www/html
+    networks:
+      - socialhose
+    volumes:
+      - ./:/var/www/html
+
+  socialhose-elastic:
+    image: elasticsearch:5.6.9
+    container_name: socialhose-elastic
+    working_dir: /var/www/html
+    networks:
+      - socialhose
+    ports:
+      - "9200:9200"
+
+  socialhose-elastichq:
+    image: elastichq/elasticsearch-hq
+    container_name: socialhose-elastic-hq
+    working_dir: /var/www/html
+    networks:
+      - socialhose
+    ports:
+      - "5000:5000"
+
+  socialhose-mail:
+    image: mailhog/mailhog
+    container_name: socialhose-mail
+    networks:
+      - socialhose
+    ports:
+      - "8025:8025"
+      - "1025:1025"

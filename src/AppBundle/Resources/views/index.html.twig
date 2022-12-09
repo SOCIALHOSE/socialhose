@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{%- block title -%}
+    Social Listening Platform | Social Analytics | SOCIALHOSE.IO App
+{%- endblock -%}
+
+{% block body %}
+    <div id="app-container"></div>
+{% endblock body %}
+
+{% block javascripts %}
+    <script>
+        var init = function() {
+          CW.init({ 'containerId': 'app-container' })
+        }
+    </script>
+    <script src="{{- asset('dist/cw-vendors.js') -}}"></script>
+    <script src="{{- asset('dist/cw.js') -}}"></script>
+{% endblock javascripts %}
+
+{% block stylesheets %}
+    <link href="{{- asset('dist/cw.css') -}}" rel="stylesheet">
+{% endblock stylesheets %}

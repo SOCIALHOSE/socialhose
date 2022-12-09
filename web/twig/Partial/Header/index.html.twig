@@ -1,0 +1,29 @@
+{#
+
+    Header component.
+
+#}
+
+{% set enhanced = themeType == 'enhanced' %}
+
+{%- if enhanced or header.imageUrl is not empty -%}
+    <header class="email-header">
+        <div class="email-header-logo">
+            <a href="{{- header.logoLink -}}">
+                <img src="{{- header.imageUrl -}}">
+            </a>
+        </div>
+        <div class="email-header-info">
+            {%- if enhanced -%}
+                <div class="email-header-info-content">
+                    <div class="email-header-info-title">
+                        {{- header.title -}}
+                    </div>
+                    <div class="email-header-info-date">
+                        {{- 'now'|date('F d, Y H:i') -}}
+                    </div>
+                </div>
+            {%- endif -%}
+        </div>
+    </header>
+{%- endif -%}

@@ -1,0 +1,223 @@
+{% set _root = _root|default('UserBundle:Notification:') %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="x-apple-disable-message-reformatting">
+    <title>{%- block title -%}{%- endblock title -%}</title>
+    {#
+
+        CSS normalization.
+
+    #}
+    <style>
+        html,
+        body {
+            margin: 0 auto !important;
+            padding: 0 !important;
+            height: 100% !important;
+            width: 100% !important;
+            font-size: 14px;
+            color: #737373;
+        {%- if theme.type == 'enhanced' -%}
+            background: {{- theme.options.colors.background.emailBody|raw -}};
+        {%- endif -%}
+        }
+
+        {# Stops email clients resizing small text. #}
+        * {
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        {# Stops Outlook from adding extra spacing to tables. #}
+        table,
+        td {
+            mso-table-lspace: 0 !important;
+            mso-table-rspace: 0 !important;
+        }
+
+        {# Fixes webkit padding issue. Fix for Yahoo mail table alignment bug. Applies table-layout to the first 2 tables then removes for anything nested deeper. #}
+        table {
+            border-spacing: 0 !important;
+            border-collapse: collapse !important;
+            table-layout: fixed !important;
+            margin: 0 auto !important;
+        }
+
+        table,
+        td{
+            border-collapse: collapse;
+        }
+
+        {# Uses a better rendering method when resizing images in IE. #}
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: 0 none;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+
+        a img{
+            border: 0 none;
+        }
+
+        {#
+
+            Email container
+
+        #}
+        .email {
+            margin: 0 auto;
+            width: 100%;
+            {%- if theme.type == 'enhanced' -%}
+                border: 4px solid {{ theme.options.colors.background.accent|raw -}};
+            {%- endif -%}
+        }
+        @media (min-width: 1000px) {
+            .email {
+                width: 920px;
+            }
+        }
+
+        .email-body {
+            padding: 5px 5px 5px 5px;
+        }
+
+        .email-body-content {
+            color: {{- theme.options.colors.text.articleContent|raw -}};
+        }
+
+        {%- include _root ~ '/Partial/Header/style.css.twig' with {
+            themeType: theme.type,
+            imageUrl: theme.options.header.imageUrl,
+            fonts: {
+                header: theme.options.fonts.header,
+            },
+            colors: {
+                background: {
+                    header: theme.options.colors.background.header,
+                    accent: theme.options.colors.background.accent
+                },
+                text: {
+                    header: theme.options.colors.text.header
+                }
+            }
+
+        } -%}
+        {%- include _root ~ '/Partial/TableOfContents/style.css.twig' with {
+            themeType: theme.type,
+            fonts: {
+                tableOfContents: theme.options.fonts.tableOfContents,
+                articleContent: theme.options.fonts.articleContent
+            },
+            colors: {
+                text: {
+                    source: theme.options.colors.text.source,
+                    articleHeadline: theme.options.colors.text.articleHeadline,
+                    articleContent: theme.options.colors.text.articleContent
+               }
+            }
+        } -%}
+        {%- include _root ~ '/Partial/Content/style.css.twig' with {
+            themeType: theme.type,
+            fonts: {
+                feedTitle: theme.options.fonts.feedTitle,
+                articleContent: theme.options.fonts.articleContent,
+                articleHeadline: theme.options.fonts.articleHeadline,
+                source: theme.options.fonts.source,
+                author: theme.options.fonts.author,
+                date: theme.options.fonts.date
+            },
+            colors: {
+                background: {
+                    accent: theme.options.colors.background.accent
+                },
+                text: {
+                    header: theme.options.colors.text.header,
+                    articleContent: theme.options.colors.text.articleContent,
+                    articleHeadline: theme.options.colors.text.articleHeadline,
+                    source: theme.options.colors.text.source,
+                    author: theme.options.colors.text.author,
+                    publishDate: theme.options.colors.text.publishDate
+                }
+            }
+        } -%}
+        {%- include _root ~ '/Partial/Footer/style.css.twig' with {
+            themeType: theme.type
+        } -%}
+
+    </style>
+    {%- block stylesheets -%}{%- endblock stylesheets -%}
+</head>
+
+<body style="width: 100%; margin: 0; mso-line-height-rule: exactly;">
+    <div class="email">
+        {#
+            Header
+        #}
+        {%- include _root ~ '/Partial/Header/index.html.twig' with {
+            themeType: theme.type,
+            header: theme.options.header
+        } -%}
+
+        <section class="email-body">
+            {#
+                Summary
+            #}
+            {%- if theme.options.summary != '' -%}
+                <div class="email-summary">
+                    {{- theme.options.summary|raw -}}
+                </div>
+            {%- endif -%}
+
+            <div class="email-body-content">
+                {#
+                    Table of contents
+                #}
+                {%- include _root ~ '/Partial/TableOfContents/index.html.twig' with {
+                    feeds: feeds,
+                    tableOfContents: theme.options.content.showInfo.tableOfContents,
+                    showArticlesCount: theme.options.content.showInfo.articleCount,
+                    themeType: theme.type
+                } -%}
+
+                {#
+                    Content.
+                #}
+                {%- include _root ~ '/Partial/Content/index.html.twig' with {
+                    feeds: feeds,
+                    showSectionDivider: theme.options.content.showInfo.sectionDivider,
+                    showImages: theme.options.content.showInfo.images,
+                    showSourceCountry: theme.options.content.showInfo.sourceCountry,
+                    showUserComments: theme.options.content.showInfo.userComments,
+                    themeType: theme.type
+                } -%}
+            </div>
+
+            {#
+                Conclusion
+            #}
+            {%- if theme.options.conclusion != '' -%}
+                <div class="email-conclusion">
+                    {{- theme.options.conclusion|raw -}}
+                </div>
+            {%- endif -%}
+        </section>
+
+        {#
+            Footer
+        #}
+        {%- include _root ~ '/Partial/Footer/index.html.twig' -%}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+user_security:
+    resource: '@UserBundle/Resources/config/routing/security.yml'
+
+authentication:
+    resource: '@AuthenticationBundle/Controller/TokenController.php'
+    type: annotation
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"     
+
+fos_user_registration_confirm:
+    path: /registration/confirm/{token}
+    defaults:  { _controller: user.controller.registration:confirmAction }
+
+fos_user_registration_confirmed:
+    path: /registration/confirmed
+    defaults:  { _controller: UserBundle:Security:Registration:confirmed }    

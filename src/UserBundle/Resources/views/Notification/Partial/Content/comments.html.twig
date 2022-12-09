@@ -1,0 +1,36 @@
+{#
+    Content document comments.
+#}
+
+{%- if (showUserComments != 'no') and (comments|length > 0) -%}
+
+{%- if themeType == 'enhanced' -%}
+    <br>
+    <b>Comments</b>
+{%- endif -%}
+<div class="comments">
+    {%- for comment in comments -%}
+        <div class="comment">
+            {%- if comment.title is not empty -%}
+                <div class="comment-title">
+                    {{- comment.title -}}
+                </div>
+            {%- endif -%}
+            <div class="comment-info">
+                By <span class="comment-author">
+                    {{- comment.author.firstName -}}&nbsp;
+                    {{- comment.author.lastName -}}
+                </span>&nbsp;
+                {%- if showUserComments == 'with_author_date' -%}
+                    on <span class="comment-date">
+                        {{- comment.createdAt|date('F d, Y H:i') -}}
+                    </span>
+                {%- endif -%}
+            </div>
+            <div class="comment-body">
+                {{- comment.content -}}
+            </div>
+        </div>
+    {%- endfor -%}
+</div>
+{%- endif -%}

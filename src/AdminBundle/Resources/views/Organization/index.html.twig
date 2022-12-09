@@ -1,0 +1,58 @@
+{% extends "AdminBundle::layout-inner.html.twig" %}
+
+{% block inner_content %}
+    <h1>
+        Organizations
+    </h1>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    {{ knp_pagination_sortable(organizations, 'Name', 'Organization.name') }}
+                </th>
+                <th>
+                    {{ knp_pagination_sortable(organizations, 'Departments count', 'subscriptionCount') }}
+                </th>
+                <th>
+                    {{ knp_pagination_sortable(organizations, 'Total user count', 'usersCount') }}
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {%- for organization in organizations -%}
+                {%- set path = path('admin_organization_edit', { 'id': organization.id }) -%}
+
+                <tr>
+                    <td>
+                        <a href="{{ path }}">{{- organization.name -}}</a>
+                    </td>
+                    <td>
+                        {{- organization.subscriptionCount -}}
+                    </td>
+                    <td>
+                        {{- organization.usersCount -}}
+                    </td>
+                    <td>
+                        <a class="btn btn-info btn-block" href="{{ path }}">Edit</a>
+                        <button type="button" class="btn btn-danger btn-block btn-delete" data-href="{{ path('admin_organization_delete', { 'id': organization.id }) }}">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            {%- endfor -%}
+        </tbody>
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(organizations) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{- parent() -}}
+    <script src="{{ asset('/bundles/admin/js/common_crud.js') }}"></script>
+{% endblock javascripts %}

@@ -1,0 +1,8 @@
+[program:documents_fetching]
+directory={{CWD}}
+command={{CWD}}/bin/console --env=stage rabbitmq:consumer documents_fetch
+environment=
+user=socialhose
+autostart=true
+autorestart=true
+redirect_stderr=True

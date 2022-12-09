@@ -1,0 +1,14 @@
+{% extends "AdminBundle::layout-inner.html.twig" %}
+
+{% block inner_content %}
+    <div class="row">
+        <div class="col-xs-3">
+            <h1>Dashboard</h1>
+        </div>
+        <div class="col-xs-3 col-xs-offset-6">
+            <a href="{{ path('admin_logging_out') }}">
+                logout
+            </a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+services:
+  #
+  # Fetchers.
+  #
+  cache.feed_formatter.basic:
+    class: 'CacheBundle\Feed\Formatter\BasicFeedFormatter'
+    arguments:
+      - '@app.feed_manager'
+      - '@service_container'
+
+  cache.feed_formatter: '@cache.feed_formatter.basic'
+
+  #
+  # Strategies.
+  #
+  cache.feed_formatter_strategy.abstract:
+    class: 'CacheBundle\Feed\Formatter\Strategy\AbstractFeedFormatStrategy'
+    arguments:
+      - '@cache.document_content_extractor'
+    abstract: true
+
+  cache.feed_formatter_strategy.tsv:
+    class: 'CacheBundle\Feed\Formatter\Strategy\TsvFeedFormatterStrategy'
+    parent: 'cache.feed_formatter_strategy.abstract'
+
+  cache.feed_formatter_strategy.rss:
+    class: 'CacheBundle\Feed\Formatter\Strategy\RssFeedFormatterStrategy'
+    parent: 'cache.feed_formatter_strategy.abstract'
+    arguments:
+      - '@router'
+
+  cache.feed_formatter_strategy.html:
+    class: 'CacheBundle\Feed\Formatter\Strategy\HtmlFeedFormatterStrategy'
+    parent: 'cache.feed_formatter_strategy.abstract'
+    arguments:
+      - '@templating'
+
+  cache.feed_formatter_strategy.atom:
+    class: 'CacheBundle\Feed\Formatter\Strategy\AtomFeedFormatterStrategy'
+    parent: 'cache.feed_formatter_strategy.abstract'
+    arguments:
+      - '@router'

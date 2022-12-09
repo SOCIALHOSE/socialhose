@@ -1,0 +1,295 @@
+/**
+ * ref: https://github.com/alipajand/bootstrap4-rtl and some manual modifications
+ */
+
+[dir='rtl'] {
+  direction: rtl;
+  text-align: $right;
+
+  .nav {
+    padding-#{$right}: 0;
+  }
+
+  .navbar-nav .nav-item {
+    float: $right;
+  }
+
+  .alert-dismissible {
+    padding-#{$left}: 4rem;
+    padding-#{$right}: 1.25rem;
+  }
+
+  .dropdown-menu:not(.dropdown-menu-left) {
+    #{$right}: 0;
+    text-align: $right;
+  }
+
+  .checkbox label {
+    padding-#{$right}: 1.25rem;
+    padding-#{$left}: inherit;
+  }
+
+  .text-left {
+    text-align: right !important;
+  }
+
+  .text-right {
+    text-align: left !important;
+  }
+
+  .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+    @include border-radius(0 $border-radius $border-radius 0);
+  }
+
+  .btn-group > .btn:last-child:not(:first-child),
+  .btn-group > .dropdown-toggle:not(:first-child) {
+    @include border-radius($border-radius 0 0 $border-radius);
+  }
+
+  .btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {
+    @include border-radius($border-radius 0 0 $border-radius);
+  }
+
+  /*   .custom-control-label::after,
+  .custom-control-label::before {
+    #{$right}: -25px;
+    #{$left}: auto;
+  } */
+
+  .custom-select {
+    padding: $custom-select-padding-y $custom-select-padding-x
+      $custom-select-padding-y
+      ($custom-select-padding-x + $custom-select-indicator-padding);
+    background: $custom-select-bg $custom-select-indicator no-repeat $left
+      $custom-select-padding-x center;
+    background-size: $custom-select-bg-size;
+  }
+
+  .input-group
+    > .input-group-append:last-child
+    > .btn:not(:last-child):not(.dropdown-toggle),
+  .input-group
+    > .input-group-append:last-child
+    > .input-group-text:not(:last-child),
+  .input-group > .input-group-append:not(:last-child) > .btn,
+  .input-group > .input-group-append:not(:last-child) > .input-group-text,
+  .input-group > .input-group-prepend > .btn,
+  .input-group > .input-group-prepend > .input-group-text {
+    @include border-radius(0 $border-radius $border-radius 0);
+  }
+
+  .input-group > .input-group-append > .btn,
+  .input-group > .input-group-append > .input-group-text,
+  .input-group > .input-group-prepend:first-child > .btn:not(:first-child),
+  .input-group
+    > .input-group-prepend:first-child
+    > .input-group-text:not(:first-child),
+  .input-group > .input-group-prepend:not(:first-child) > .btn,
+  .input-group > .input-group-prepend:not(:first-child) > .input-group-text {
+    @include border-radius($border-radius 0 0 $border-radius);
+  }
+
+  .input-group > .custom-select:not(:first-child),
+  .input-group > .form-control:not(:first-child) {
+    @include border-radius($border-radius 0 0 $border-radius);
+  }
+
+  .input-group > .custom-select:not(:last-child),
+  .input-group > .form-control:not(:last-child) {
+    @include border-radius(0 $border-radius $border-radius 0);
+  }
+
+  .input-group > .custom-select:not(:last-child):not(:first-child),
+  .input-group > .form-control:not(:last-child):not(:first-child) {
+    border-radius: 0;
+  }
+  /* 
+  .custom-control {
+    margin-#{$left}: 1rem;
+    padding-#{$left}: inherit;
+    margin-#{$right}: inherit;
+    padding-#{$right}: $custom-control-spacer-x;
+  }
+
+  .custom-control-indicator {
+    #{$right}: 0;
+    #{$left}: inherit;
+  } */
+
+  .custom-file-label::after {
+    #{$left}: -1px;
+    #{$right}: initial;
+    border-radius: 0.25rem 0 0 0.25rem;
+  }
+
+  .radio input,
+  .radio-inline,
+  .checkbox input,
+  .checkbox-inline input {
+    margin-#{$right}: -$list-group-item-padding-x;
+    margin-#{$left}: inherit !important;
+  }
+
+  .list-group {
+    padding-#{$right}: 0;
+    padding-#{$left}: $list-group-item-padding-x;
+  }
+
+  .close {
+    float: $left;
+  }
+
+  .modal-header .close {
+    padding: $modal-header-padding;
+    margin: (-$modal-header-padding-y) auto (-$modal-header-padding-y)
+      (-$modal-header-padding-x);
+  }
+
+  .modal-footer > :not(:first-child) {
+    margin-#{$right}: 0.25rem;
+  }
+
+  .alert-dismissible .close {
+    #{$left}: 0;
+    #{$right}: inherit;
+  }
+
+  .dropdown-toggle::after {
+    margin-#{$left}: 0;
+    margin-#{$right}: 0.255em;
+  }
+
+  .form-check-input {
+    margin-#{$left}: inherit;
+    margin-#{$right}: -$list-group-item-padding-x;
+  }
+
+  .form-check-label {
+    padding-#{$right}: $list-group-item-padding-x;
+    padding-#{$left}: inherit;
+  }
+
+  .pagination .page-item:first-child .page-link {
+    @include border-radius(0 $border-radius $border-radius 0);
+  }
+
+  .pagination .page-item:last-child .page-link {
+    @include border-radius($border-radius 0 0 $border-radius);
+  }
+
+  .pagination-sm .page-item:first-child .page-link {
+    border-top-#{$right}-radius: $border-radius-sm;
+    border-bottom-#{$right}-radius: $border-radius-sm;
+  }
+
+  .pagination-sm .page-item:last-child .page-link {
+    border-top-#{$left}-radius: $border-radius-sm;
+    border-bottom-#{$left}-radius: $border-radius-sm;
+  }
+
+  .pagination-lg .page-item:first-child .page-link {
+    border-top-#{$right}-radius: $border-radius-lg;
+    border-bottom-#{$right}-radius: $border-radius-lg;
+  }
+
+  .pagination-lg .page-item:last-child .page-link {
+    border-top-#{$left}-radius: $border-radius-lg;
+    border-bottom-#{$left}-radius: $border-radius-lg;
+  }
+
+  .input-group > .custom-file:not(:last-child) .custom-file-label,
+  .input-group > .custom-file:not(:last-child) .custom-file-label::after {
+    @include border-radius(0 $border-radius $border-radius 0);
+  }
+
+  @mixin make-col-offset($size, $columns: $grid-columns) {
+    $num: $size / $columns;
+    margin-#{$left}: 0;
+    margin-#{$right}: if($num == 0, 0, percentage($num));
+  }
+
+  @mixin make-grid-columns(
+    $columns: $grid-columns,
+    $gutter: $grid-gutter-width,
+    $breakpoints: $grid-breakpoints
+  ) {
+    @each $breakpoint in map-keys($breakpoints) {
+      $infix: breakpoint-infix($breakpoint, $breakpoints);
+      @include media-breakpoint-up($breakpoint, $breakpoints) {
+        @for $i from 0 through ($columns - 1) {
+          @if not($infix == '' and $i == 0) {
+            .offset#{$infix}-#{$i} {
+              @include make-col-offset($i, $columns);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @if $enable-grid-classes {
+    @include make-grid-columns();
+  }
+
+  // stylelint-disable declaration-no-important
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    @include media-breakpoint-up($breakpoint) {
+      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+      @each $size, $length in $spacers {
+        .mr#{$infix}-#{$size} {
+          margin-#{$right}: 0 !important;
+          margin-#{$left}: $length !important;
+        }
+        .ml#{$infix}-#{$size} {
+          margin-#{$right}: $length !important;
+          margin-#{$left}: 0 !important;
+        }
+      }
+
+      @each $size, $length in $spacers {
+        .pr#{$infix}-#{$size} {
+          padding-#{$left}: $length !important;
+          padding-#{$right}: inherit !important;
+        }
+        .pl#{$infix}-#{$size} {
+          padding-#{$left}: inherit !important;
+          padding-#{$right}: $length !important;
+        }
+      }
+
+      .text#{$infix}-left {
+        text-align: $right !important;
+      }
+
+      .text#{$infix}-right {
+        text-align: $left !important;
+      }
+
+      .mr#{$infix}-auto {
+        margin-#{$left}: auto !important;
+        margin-#{$right}: inherit !important;
+      }
+      .ml#{$infix}-auto {
+        margin-#{$right}: auto !important;
+        margin-#{$left}: inherit !important;
+      }
+    }
+  }
+}
+
+// manually added
+
+[dir='rtl'] {
+  @mixin float-left {
+    float: right !important;
+    @include deprecate('The `float-right` mixin', 'v4.3.0', 'v5');
+  }
+  @mixin float-right {
+    float: left !important;
+    @include deprecate('The `float-left` mixin', 'v4.3.0', 'v5');
+  }
+  .alert {
+    text-align: right;
+  }
+}

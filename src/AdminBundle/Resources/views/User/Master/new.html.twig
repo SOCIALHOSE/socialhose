@@ -1,0 +1,10 @@
+{% extends 'AdminBundle:User/Layout:new_layout.html.twig' %}
+
+{% block new_title %}
+    Master User creation
+{% endblock new_title %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('/bundles/admin/js/master_crud.js') }}"></script>
+{% endblock javascripts %}

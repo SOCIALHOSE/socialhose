@@ -1,0 +1,98 @@
+UserBundle\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: email
+            groups:
+                - registration
+                - subscribers_creation
+                - admin_users_creation
+                - admin_administrator_creation
+
+    properties:
+        firstName:
+            - NotBlank:
+                groups:
+                    - registration
+                    - subscribers_creation
+                    - admin_users_creation
+                    - admin_administrator_creation
+
+        lastName:
+            - NotBlank:
+                groups:
+                    - registration
+                    - subscribers_creation
+                    - admin_users_creation
+                    - admin_administrator_creation
+
+        email:
+            - NotBlank:
+                groups:
+                    - registration
+                    - subscribers_creation
+                    - admin_users_creation
+                    - admin_administrator_creation
+            - Email:
+                groups:
+                    - registration
+                    - subscribers_creation
+                    - admin_users_creation
+                    - admin_administrator_creation
+
+        position:
+            - NotBlank:
+                groups:
+                    - subscribers_creation
+                    - admin_subscribers_creation
+
+        phoneNumber:
+            - NotBlank:
+                groups:
+                    - subscribers_creation
+                    - admin_subscribers_creation
+
+        password:
+            - NotBlank:
+                groups:
+                    - resetting
+
+        plainPassword:
+            - NotBlank:
+                groups:
+                    - resetting
+                    - admin_administrator_creation_password
+        masterUser:
+            - NotNull:
+                groups:
+                    - admin_subscribers_creation
+        
+        companyName:
+            - NotBlank:
+                groups:
+                    - registration
+                    - subscribers_creation
+                    - admin_users_creation
+                    - admin_administrator_creation
+        
+        jobFunction:
+            - NotBlank:
+                groups:
+                    - registration
+                    - subscribers_creation
+                    - admin_users_creation
+                    - admin_administrator_creation
+        industry:
+            - NotBlank:
+                groups:
+                    - registration
+                    - subscribers_creation
+                    - admin_users_creation
+                    - admin_administrator_creation  
+        
+        numberOfEmployee:
+            - NotBlank:
+                groups:
+                    - registration
+                    - subscribers_creation
+                    - admin_users_creation
+                    - admin_administrator_creation

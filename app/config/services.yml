@@ -1,0 +1,8 @@
+imports:
+    - { resource: '@ApiBundle/Resources/config/services.yml' }
+    - { resource: '@CacheBundle/Resources/config/services.yml' }
+    - { resource: '@UserBundle/Resources/config/services.yml' }
+    - { resource: '@AuthenticationBundle/Resources/config/services.yml' }
+    - { resource: '@AdminBundle/Resources/config/services.yml' }
+    - { resource: '@QueueBundle/Resources/config/services.yml' }
+    - { resource: '@PaymentBundle/Resources/config/services.yml' }

@@ -1,0 +1,90 @@
+services:
+  app.controller.abstract_v1_crud:
+    class: 'AppBundle\Controller\V1\AbstractV1CrudController'
+    arguments:
+      - '@form.factory'
+      - '@api.access_checker'
+      - '@doctrine.orm.default_entity_manager'
+    abstract: true
+
+  app.controller.index:
+    class: 'AppBundle\Controller\IndexController'
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@cache.feed_formatter'
+
+  app.controller.category:
+    class: 'AppBundle\Controller\V1\CategoryController'
+    parent: 'api.controller.abstract_crud'
+    arguments:
+      index_1: 'CacheBundle\Entity\Category'
+
+  app.controller.query:
+    class: 'AppBundle\Controller\V1\QueryController'
+    arguments:
+      - '@form.factory'
+      - '@doctrine.orm.default_entity_manager'
+      - '@security.token_storage'
+      - '@app.source_manager'
+      - '@app.simple_query_manager'
+      - '@cache.document_content_extractor'
+
+  app.controller.feed:
+    class: 'AppBundle\Controller\V1\FeedController'
+    parent: app.controller.abstract_v1_crud
+    arguments:
+      - 'CacheBundle\Entity\Feed\AbstractFeed'
+      - '@security.token_storage'
+      - '@app.feed_manager'
+      - '@cache.document_content_extractor'
+      - '@cache.feed_fetcher_factory'
+      - '@kernel'
+      - '@app.stored_query_manager'
+      - '@queue.producer.documents_fetch'
+      - '%feed.limit%'
+
+
+  app.controller.analytic:
+    class: 'AppBundle\Controller\V1\AnalyticController'
+    parent: api.controller.abstract_crud
+    arguments:
+      index_1: 'CacheBundle\Entity\Analytic\Analytic'
+
+  app.controller.comment:
+    class: 'AppBundle\Controller\V1\CommentController'
+    parent: app.controller.abstract_v1_crud
+    arguments:
+      - 'CacheBundle\Entity\Comment'
+
+  app.controller.document:
+    class: 'AppBundle\Controller\V1\DocumentController'
+    arguments:
+      - '@security.token_storage'
+      - '@form.factory'
+      - '@api.access_checker'
+      - '@doctrine.orm.default_entity_manager'
+      - '@cache.comment_manager'
+      - '@queue.producer.documents_email'
+
+  app.controller.source-index:
+    class: 'AppBundle\Controller\V1\SourceIndexController'
+    arguments:
+      - '@security.token_storage'
+      - '@form.factory'
+      - '@app.source_manager'
+      - '@doctrine.orm.default_entity_manager'
+
+  app.controller.source-list:
+    class: 'AppBundle\Controller\V1\SourceListController'
+    parent: api.controller.abstract
+
+  app.controller.analytic-graph:
+    class: 'AppBundle\Controller\V1\AnalyticGraphController'
+    parent: api.controller.abstract_crud
+    arguments:
+      index_1: 'CacheBundle\Entity\Analytic\Analytic'
+  app.controller.analytic-mention-graph:
+    class: 'AppBundle\Controller\V1\AnalyticMentionGraphController'
+    parent: api.controller.abstract_crud
+    arguments:
+      index_1: 'CacheBundle\Entity\Analytic\Analytic'

@@ -1,0 +1,129 @@
+{% extends 'AdminBundle:User/Layout:show_layout.html.twig' %}
+
+{%- set billingType = user.billingSubscription.subscriptionType -%}
+
+{% block show_title %}
+    Subscriber
+{% endblock show_title %}
+
+{% block show_content %}
+    <h3>
+        User information
+    </h3>
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Firstname</th>
+            <td>{{ user.firstName }}</td>
+        </tr>
+        <tr>
+            <th>Lastname</th>
+            <td>{{ user.lastName }}</td>
+        </tr>
+        <tr>
+            <th>
+                Position
+            </th>
+            <td>
+                {{ user.position }}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Phone Number
+            </th>
+            <td>
+                {{ user.phoneNumber }}
+            </td>
+        </tr>
+        <tr>
+            <th>Number of saved feeds allowed</th>
+            <td>
+                {{- user.billingSubscription.getPlan.savedFeeds }} /
+                {{ user.billingSubscription.savedFeeds -}}
+            </td>
+        </tr>
+        <tr>
+            <th>Number of alerts allowed</th>
+            <td>
+                {{- user.billingSubscription.getPlan.alerts }} /
+                {{ user.billingSubscription.alerts -}}
+            </td>
+        </tr>
+        <tr>
+            <th>Number of newsletters allowed</th>
+            <td>
+                {{- user.billingSubscription.getPlan.newsletters }} /
+                {{ user.billingSubscription.newsletters -}}
+            </td>
+        </tr>
+        <tr>
+            <th>Number of ad-hoc searches per day allowed</th>
+            <td>
+                {{- user.billingSubscription.getPlan.searchesPerDay }} /
+                {{ user.billingSubscription.searchesPerDay -}}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Billing subscription type
+            </th>
+            <td>
+                {{- billingType.value is constant('ORGANIZATION', billingType) ? 'organization' : 'personal' -}}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Master
+            </th>
+            <td>
+                <a href="{{ path('admin_user_master_show', { 'id': user.masterUser.id }) }}">
+                    {{- user.masterUser.email -}}
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    {%- if billingType.value is constant('ORGANIZATION', billingType) -%}
+        <h3>
+            Organization information
+        </h3>
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <td>
+                    {{- user.billingSubscription.getOrganization.name -}}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Department address
+                </th>
+                <td>
+                    {{- user.billingSubscription.organizationAddress -}}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Department email
+                </th>
+                <td>
+                    {{- user.billingSubscription.organizationEmail -}}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Department phone
+                </th>
+                <td>
+                    {{- user.billingSubscription.organizationPhone -}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    {%- endif -%}
+{% endblock show_content %}

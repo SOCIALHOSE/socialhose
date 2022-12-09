@@ -1,0 +1,39 @@
+services:
+  #
+  # Category inspector.
+  #
+  cache.inspector.category:
+    class: 'CacheBundle\Security\Inspector\CategoryInspector'
+    tags:
+      - { name: socialhose.inspector }
+  #
+  # Comment inspector.
+  #
+  cache.inspector.comment:
+    class: 'CacheBundle\Security\Inspector\CommentInspector'
+    tags:
+      - { name: socialhose.inspector }
+
+  #
+  # Query feed inspector.
+  #
+  cache.inspector.query_feed:
+    class: 'CacheBundle\Security\Inspector\FeedInspector'
+    tags:
+      - { name: socialhose.inspector }
+
+  #
+  # Source list inspector
+  #
+  cache.inspector.source_list:
+    class: 'CacheBundle\Security\Inspector\SourceListInspector'
+    tags:
+      - { name: socialhose.inspector }
+
+  #
+  # Analytic inspector
+  #
+  cache.inspector.analytic:
+    class: 'CacheBundle\Security\Inspector\AnalyticInspector'
+    tags:
+      - { name: socialhose.inspector }

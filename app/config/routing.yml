@@ -1,0 +1,42 @@
+#
+# Administrative panel
+#
+admin:
+  resource: '@AdminBundle/Controller'
+  prefix: /admin
+#
+# First versions of api.
+#
+api_v1:
+  resource: 'routing_api_v1.yml'
+  prefix: /api/v1
+
+#
+# Security routes for creating and refreshing JWT tokens and also for
+# registration.
+#
+security:
+  resource: 'routing_api_security.yml'
+  prefix: /security
+
+#
+# Main application.
+#
+app:
+  resource: '@AppBundle/Controller/IndexController.php'
+  type: annotation
+
+payment:
+  resource: '@PaymentBundle/Controller/IpnController.php'
+  type: annotation
+  prefix: '/billing'
+
+
+register_finish:
+  path: '/auth/register-finish'
+  methods: [ 'GET' ]
+  defaults:
+    _controller: 'AppBundle:Index:index'
+
+miracode_stripe:
+    resource: '@MiracodeStripeBundle/Resources/config/routing.xml'

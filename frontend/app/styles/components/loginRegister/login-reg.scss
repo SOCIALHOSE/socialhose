@@ -1,0 +1,401 @@
+body {
+
+  &.plans {
+    background: #e6e6e6 url(../images/plans-bg.png) no-repeat center center;
+  }
+
+  &.register {
+    background: url(../images/register-bg.png) no-repeat center bottom;
+    -webkit-background-size: cover;
+    background-size: cover;
+
+    .account-form {
+      width: 100%;
+      padding: 0;
+      background: none;
+
+      &__content {
+        padding: 60px 90px;
+        background: #f2f2f2;
+      }
+    }
+  }
+
+  &.login,
+  &.plans,
+  &.register {
+    .footer {
+      // margin-top: -28px;
+    }
+  }
+}
+
+.login-register {
+  min-height: calc(100% - 67px);
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    color: #666;
+    padding: 0 15px;
+    border: 1px solid #d4d4d4;
+    width: 100%;
+    height: 32px;
+    font-size: 14px;
+    border-radius: 7px;
+
+    &.invalid {
+      border-color: #ff3333;
+    }
+  }
+}
+
+.account-form {
+  background: #f2f2f2;
+  width: 512px;
+  margin: 0 auto;
+  padding: 60px 90px;
+  color: #808080;
+}
+
+.login-register-content {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  margin: 0;
+}
+
+.payment-success-message {
+  font-size: 23px;
+}
+
+.slider-block {
+  float: right;
+  width: 540px;
+}
+
+.support-info {
+  font-size: 12px;
+  border-top: 1px solid #a9aaac;
+
+  p {
+    margin: 15px 0;
+  }
+}
+
+.support-contacts {
+  &__label {
+    display: inline-block;
+    padding: 0 10px 3px 0;
+    width: 105px;
+  }
+}
+
+.account-form {
+  margin-bottom: 10px;
+
+  &__title {
+    font-size: 30px;
+    font-weight: normal;
+    margin-bottom: 20px;
+  }
+
+  &__subtitle {
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+
+  &__register-title {
+    text-align: center;
+    position: relative;
+    margin-bottom: 40px;
+    min-height: 30px;
+
+    a {
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #999;
+      font-size: 14px;
+      i {
+        color: #83c5aa;
+        margin-inline-end: 3px;
+      }
+    }
+  }
+
+  &__content {
+    h1 {
+      font-size: 52px;
+      font-weight: 300;
+      color: #4d4d4d;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    &__body {
+      display: flex;
+    }
+  }
+
+  &__column {
+    flex: 1;
+    padding: 15px;
+  }
+
+  &__alt-title {
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  &__row {
+    margin-bottom: 20px;
+    &.reg-actions {
+      text-align: center;
+    }
+  }
+
+  &__col {
+    width: 48%;
+    display: inline-block;
+
+    &:first-child {
+      margin-inline-end: 4%;
+    }
+  }
+
+  &__label {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  &__submit-button {
+    background: #0293af;
+    background: -moz-linear-gradient(left, #0293af 0%, #82c4aa 100%);
+    background: -webkit-linear-gradient(left, #0293af 0%, #82c4aa 100%);
+    background: linear-gradient(to right, #0293af 0%, #82c4aa 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0293af', endColorstr='#82c4aa',GradientType=1 );
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+  }
+
+  &__error {
+    float: left;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #8d6e71;
+  }
+
+  &__inline-input {
+    display: inline-block;
+    width: 100px;
+    margin: 0 10px 0 0;
+
+    &:last-child {
+      margin-inline-start: 10px;
+    }
+  }
+
+  &__note {
+    margin-top: 30px;
+  }
+
+  #CVV {
+    width: 50%;
+    display: block;
+  }
+
+  .inline-Select {
+    display: inline-block;
+    width: 115px;
+    margin: 0 10px 0 0;
+
+    &:last-child {
+      margin-inline-start: 10px;
+    }
+  }
+
+  .Select-menu {
+    background: white;
+    border: 1px solid #bcbec0;
+  }
+
+  .Select-control {
+    height: 30px;
+    font-size: 14px;
+    color: #666;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+  }
+
+  .Select-placeholder,
+  .Select--single > .Select-control .Select-value {
+    line-height: 30px;
+  }
+
+  .Select-input {
+    height: 30px;
+  }
+
+  .Select.invalid {
+    .Select-control {
+      border-color: #ff3333;
+    }
+  }
+
+  .forgot-link {
+    color: #999;
+  }
+}
+/* 
+#remember-me-check {
+  display: none;
+} */
+
+.account-form__row {
+  &.forgot-row {
+    margin-bottom: 40px;
+  }
+  .remember-checkbox.checkbox-label {
+    float: right;
+    margin-top: 7px;
+    line-height: 16px;
+    i {
+      font-size: 13px;
+      vertical-align: top;
+      color: #005f77;
+      line-height: 16px;
+    }
+  }
+}
+
+.billing-plans {
+  &__title {
+    padding-top: 30px;
+    text-align: center;
+    position: relative;
+    margin-bottom: 40px;
+    &.forgot__title {
+      width: 512px;
+      margin: 0 auto 30px;
+      a {
+        left: 0;
+      }
+    }
+
+    h1 {
+      font-size: 52px;
+      font-weight: 300;
+      color: #4d4d4d;
+    }
+    a {
+      position: absolute;
+      left: 15px;
+      top: 0;
+      color: #999;
+      font-size: 14px;
+      i {
+        color: #83c5aa;
+        margin-inline-end: 3px;
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.checked-item {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+
+  & p {
+    text-align: start;
+    transform: translateY(-3px);
+  }
+}
+
+.plan-item {
+  margin: 15px;
+  flex: 1;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 250px;
+  background: #ffffff;
+
+  &__title {
+    margin-bottom: 15px;
+    padding: 15px;
+    color: #fff;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    text-transform: uppercase;
+  }
+
+  &__desc {
+    line-height: 1.3;
+    padding: 15px 30px 0;
+    color: #676767;
+    font-size: 18px;
+    text-align: start;
+    &__item {
+      margin-bottom: 10px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    &__price {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  }
+
+  .button {
+    -webkit-border-radius: 0 0 5px 5px;
+    -moz-border-radius: 0 0 5px 5px;
+    border-radius: 0 0 5px 5px;
+    position: relative;
+    top: 40px;
+    height: 40px;
+    padding: 10px 30px;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: normal;
+  }
+
+  &.plan-0 {
+    .plan-item__title,
+    .button {
+      background: #005f77;
+    }
+  }
+  &.plan-1 {
+    .plan-item__title,
+    .button {
+      background: #0092af;
+    }
+  }
+  &.plan-2 {
+    .plan-item__title,
+    .button {
+      background: #83c5aa;
+    }
+  }
+}
+
+.success-message {
+  text-align: center;
+  padding: 40px;
+  width: 512px;
+  margin: 50px auto;
+  color: #fff;
+  font-size: 24px;
+}

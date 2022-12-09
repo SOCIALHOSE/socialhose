@@ -1,0 +1,10 @@
+{% trans_default_domain 'email' %}
+{% block body_text %}
+{% autoescape false %}
+{{- 'verification_rejected.message'|trans({
+    '%firstName%': user.firstName,
+    '%lastName%': user.lastName
+})
+-}}
+{% endautoescape %}
+{% endblock %}

@@ -1,0 +1,42 @@
+imports:
+  - { resource: inspectors.yml }
+  - { resource: forms.yml }
+  - { resource: feed_fetchers.yml }
+  - { resource: feed_formatters.yml }
+
+services:
+  cache.repository.category:
+    class: 'CacheBundle\Repository\CategoryRepository'
+    factory: [ '@doctrine.orm.default_entity_manager', 'getRepository' ]
+    arguments: [ 'CacheBundle\Entity\Category' ]
+    public: false
+
+  cache.repository.analytic_context:
+    class: 'AppBundle\Doctrine\ORM\BaseEntityRepository'
+    factory: [ '@doctrine.orm.default_entity_manager', 'getRepository' ]
+    arguments: [ 'CacheBundle\Entity\Analytic\AnalyticContext' ]
+    public: false
+
+  cache.validator.category_parent:
+    class: 'CacheBundle\Validator\Constraints\CategoryParentValidator'
+    arguments: [ '@cache.repository.category' ]
+    tags:
+      - { name: validator.constraint_validator }
+
+  cache.comment_manager:
+    class: 'CacheBundle\Comment\Manager\CommentManager'
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+
+  cache.document_content_extractor.basic:
+    class: 'CacheBundle\Document\Extractor\BasicDocumentContentExtractor'
+    arguments:
+      - "@=service('app.configuration').getParameter('notification.start_extract_length')"
+      - "@=service('app.configuration').getParameter('notification.context_extract_length')"
+
+  cache.document_content_extractor: '@cache.document_content_extractor.basic'
+
+  cache.analytic_factory:
+    class: 'CacheBundle\Service\Factory\Analytic\AnalyticFactory'
+    arguments:
+      - '@cache.repository.analytic_context'

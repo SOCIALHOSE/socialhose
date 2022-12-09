@@ -1,0 +1,3 @@
+security:
+    resource: '@UserBundle/Controller/Security/'
+    type: annotation

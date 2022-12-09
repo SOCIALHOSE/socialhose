@@ -1,0 +1,52 @@
+#
+# Define all possible indices.
+#
+# Used indices determines based on current application environment.
+# see indices_*.yml files in the same directory.
+#
+
+services:
+  #
+  # All possible external indices.
+  #
+  index.external.hose:
+    class: 'IndexBundle\Index\External\InternalHoseIndex'
+    arguments:
+      - '@app.cache'
+      - '%internal_hose.host%'
+      - '%internal_hose.port%'
+      - '%internal_hose.index%'
+      - '%internal_hose.type%'
+
+  index.external.internal_hose:
+    class: 'IndexBundle\Index\External\InternalHoseIndex'
+    arguments:
+      - '@app.cache'
+      - '%internal_hose.host%'
+      - '%internal_hose.port%'
+      - '%internal_hose.index%'
+      - '%internal_hose.type%'
+
+  #
+  # All possible internal articles indices
+  #
+
+  index.articles.elasticsearch:
+    class: 'IndexBundle\Index\Internal\InternalIndex'
+    arguments:
+      - '%cache_index.host%'
+      - '%cache_index.port%'
+      - '%cache_index.index%'
+      - '%cache_index.type%'
+
+  #
+  # All possible internal sources indices
+  #
+
+  index.sources.elasticsearch:
+    class: 'IndexBundle\Index\Source\SourceIndex'
+    arguments:
+      - '%cache_index.host%'
+      - '%cache_index.port%'
+      - '%source_index.index%'
+      - '%source_index.type%'
