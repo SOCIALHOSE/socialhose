@@ -76,7 +76,7 @@
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.35",
     "namor": "^1.1.2",
-    "node-sass": "^4.13.0",
+    "node-sass": "^8.0.0",
     "pe7-icon": "^1.0.4",
     "prop-types": "^15.5.10",
     "quill": "^1.2.4",
